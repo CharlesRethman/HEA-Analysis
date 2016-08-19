@@ -37,6 +37,22 @@
          ]
       }
    },
+   "energy_req" : {
+      "baseline" : {
+         "value" : "cell",
+         "unit" : "cell"
+      },
+      "current" : {
+         "value" : "cell",
+         "unit" : "cell"
+      }
+   },
+   "hh_size" : "cell",
+   "staple" : {
+      "name" : "cell",
+      "food_energy" : "cell",
+      "price_bl" : "cell"
+   },
    "fpl" : {
       "cell" : "T30",
       "num" : 1,
