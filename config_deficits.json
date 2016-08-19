@@ -1,29 +1,41 @@
 {
    "baseline" : {
-      "food" : [
-         {
-         "item" : "cell",
-         "baseline" : "cell",
-         "expandability" : "cell",
-         "problem_qty" : "cell",
-         }
-      ],
-      "income" : [
-         {
-         "item" : "cell",
-         "expandability" : "cell",
-         "problem_qty" : "cell",
-         "problem_price" : "cell"
-         }
-      ],
-      "expenditure" : [
-         {
-         "item" : "cell",
-         "expandability" : "cell",
-         "problem_qty" : "cell",
-         "problem_price" : "cell"
-         }
-      ]
+      "food" : {
+         "start_val" : "Sources of Food :",
+         "end_val" : "food deficit",
+         "data" : [
+            {
+               "item" : "cell",
+               "baseline" : "cell",
+               "expandability" : "cell",
+               "problem_qty" : "cell",
+            }
+         ]
+      },
+      "income" : {
+         "start_val" : "Income :",
+         "end_val" : "total:",
+         "data" : [
+            {
+               "item" : "cell",
+               "expandability" : "cell",
+               "problem_qty" : "cell",
+               "problem_price" : "cell"
+            }
+         ]
+      },
+      "expenditure" : {
+         "start_val" : "Expenditure :",
+         "end_val" : "total:",
+         "data" : [
+            {
+               "item" : "cell",
+               "expandability" : "cell",
+               "problem_qty" : "cell",
+               "problem_price" : "cell"
+            }
+         ]
+      }
    },
    "fpl" : {
       "cell" : "T30",
