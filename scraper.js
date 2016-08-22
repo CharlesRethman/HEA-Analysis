@@ -31,20 +31,24 @@ function ask(question, format, callback) {
    if (format === undefined) format = /\w+|\s+/;
    stdin.setEncoding('utf8');
 
+   //still typing
    stdin.resume();
+
+   // return
    stdin.once('data', function(data) {
-      if (data.length > 1) {
+/*      if (data.length > 1) {
          data = data.toString().trim();
       } else {
          data = data.toString();
-      }
+      }*/
       if (data == '\u0003') {
          callback(true);
          stdout.write('\n'); // add a line and quit
          process.exit();
       }
       if (format.test(data)) {
-         // clear any extraneous single characters in StdOut
+         data = data.toString().trim();
+         // take the callback and pass the answer (string in data)
          callback(false, data);
       } else {
          stdout.write("It should match: "+ format +"\n");
