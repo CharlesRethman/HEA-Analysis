@@ -41,12 +41,15 @@ function ask(question, format, callback) {
       } else {
          data = data.toString();
       }*/
+      // Ctrl-C
       if (data == '\u0003') {
          callback(true);
          stdout.write('\n'); // add a line and quit
          process.exit();
       }
+      // Data in StdIn
       if (format.test(data)) {
+         // trim off last whitespace
          data = data.toString().trim();
          // take the callback and pass the answer (string in data)
          callback(false, data);
