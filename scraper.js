@@ -1,5 +1,5 @@
 /*
- * @file_name: collect_oucomes.js
+ * @file_name: scraper.js
  *
  */
 
