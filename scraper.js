@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
  * @file_name: scraper.js
  *
@@ -43,9 +45,6 @@ function ask(question, format, callback) {
       }
       if (format.test(data)) {
          // clear any extraneous single characters in StdOut
-         stdout.write('\u0008');
-         stdout.write('\u007F');
-         stdout.write('\u0008');
          callback(false, data);
       } else {
          stdout.write("It should match: "+ format +"\n");
@@ -105,12 +104,16 @@ function getPassword(prompt, callback) {
          process.exit();
          break;
       case '\u007F':
-         // Backspace: BS to backup, DEL to remove character (but moves one forward), so BS again
+         // Backspace: snips the stored password, clears the line, resets the cursor to 0 position, reloads the prompt and then adds the • character times the length of the new password
          if (password.length > 0) {
-            stdout.write('\u0008');
-            stdout.write('\u007F');
-            stdout.write('\u0008');
             password = password.slice(0, password.length - 1); // snip the password one char at end
+            stdout.write('\u0008');
+            stdout.write('\u0020');
+            stdout.write('\u0008');
+/*            stdout.clearLine();
+            stdout.cursorTo(0);
+            stdout.write(prompt + ': ');
+            stdout.write('\u2022'.repeat(password.length))*/
          }
          break;
       default:
