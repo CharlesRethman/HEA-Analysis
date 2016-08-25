@@ -14,6 +14,12 @@ Spreadsheet structure:
    - On a particular Analysis date, there can be different **Hazards** or **Scenarios**. There are many Hazards or Scanerios to one Anaysis date
    - There Problems for **Quantity** and **Price** for Income Sources and Expenditure Items and **Quanitity** only for Food Sources.
 
+Data structure:
+   - I've split the data configurations into baselines (`config_blines.json`)and problem specificiations (`config_pspecs.json`). This means that the scraper will create two collections/tables: baselines and problemSpecs. This _greatly_ simplifies the data structure _but_ it makes the algorithm more complex as it will need to do a join between the collections. I have inserted a foreign key for each wealth group of the baseline and the analysis of the problemSpec will be tied to this.
+   - 
+
+
+
 ## The Analysis Algorithm
 
 ## Storing Calculations
