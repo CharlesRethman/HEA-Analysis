@@ -15,3 +15,7 @@ Spreadsheet structure:
    - There Problems for **Quantity** and **Price** for Income Sources and Expenditure Items and **Quanitity** only for Food Sources.
 
 ## The Analysis Algorithm
+
+## Storing Calculations
+
+## Presenting it to Users as an API
