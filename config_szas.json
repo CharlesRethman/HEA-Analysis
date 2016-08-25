@@ -1,96 +1,104 @@
-{
-   "baseline" : {
-      "food" : {
-         "start_val" : "Sources of Food :",
-         "end_val" : "food deficit",
-         "data" : [
-            {
-               "item" : "cell",
-               "baseline" : "cell",
-               "expandability" : "cell",
-               "analysis" : [
-                  {
-                     "a_date" : "date",
-                     "scenarios" : [
-                        {
-                           "scenario" : "name",
-                           "problem_qty" : "cell"
-                        }
-                     ]
-                  }
-               ]
-            }
-         ]
-      },
-      "income" : {
-         "start_val" : "Income :",
-         "end_val" : "total:",
-         "data" : [
-            {
-               "item" : "cell",
-               "expandability" : "cell",
-               "analysis" : [
-                  {
-                     "a_date" : "date",
-                     "scenarios" : [
-                        {
-                           "scenario" : "name",
-                           "problem_qty" : "cell",
-                           "problem_price" : "cell"
-                        }
-                     ]
-                  }
-               ]
-            }
-         ]
-      },
-      "expenditure" : {
-         "start_val" : "Expenditure :",
-         "end_val" : "total:",
-         "data" : [
-            {
-               "item" : "cell",
-               "expandability" : "cell",
-               "analysis" : [
-                  {
-                     "a_date" : "date",
-                     "scenarios" : [
-                        {
-                           "scenario" : "name",
-                           "problem_qty" : "cell",
-                           "problem_price" : "cell"
-                        }
-                     ]
-                  }
-               ]
-            }
-         ]
-      }
-   },
-   "energy_req" : {
-      "baseline" : {
-         "value" : "cell",
-         "unit" : "cell"
-      },
-      "analysis" : [
+[
+   {
+      "lz_code" : "cell: integer",
+      "lz_name" : "cell: string",
+      "lz_abbrev" : "cell: string(5 chars)",
+      "geometry" : "WKB: projected",
+      "geography" : "WKB : 4326",
+      "wgs" : [
          {
-            "a_date" : "date",
-            "scenarios" : [
-               {
-                  "scenario" : "name",
-                  "current" : {
-                     "value" : "cell",
-                     "unit" : "cell"
+            "wg_ord" : "sheet num: integer",
+            "wg_name" : "cell: string",
+            "wg_sheetname" : "sheet: string",
+            "food" : {
+               "startValue" : "Sources of Food :",
+               "endValue" : "food deficit",
+               "data" : [
+                  {
+                     "item" : "cell",
+                     "baseline" : "cell",
+                     "expandability" : "cell",
+                     "analysis" : [
+                        {
+                           "analysisDate" : "date",
+                           "scenarios" : [
+                              {
+                                 "scenario" : "name",
+                                 "problem_qty" : "cell"
+                              }
+                           ]
+                        }
+                     ]
                   }
-               }
-            ]
+               ]
+            },
+            "income" : {
+               "startValue" : "Income :",
+               "endValue" : "total:",
+               "data" : [
+                  {
+                     "item" : "cell",
+                     "expandability" : "cell",
+                     "analysis" : [
+                        {
+                           "analysisDate" : "date",
+                           "scenarios" : [
+                              {
+                                 "scenario" : "name",
+                                 "problem_qty" : "cell",
+                                 "problem_price" : "cell"
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            },
+            "expenditure" : {
+               "startValue" : "Expenditure :",
+               "endValue" : "total:",
+               "data" : [
+                  {
+                     "item" : "cell",
+                     "expandability" : "cell",
+                     "analysis" : [
+                        {
+                           "analysisDate" : "date",
+                           "scenarios" : [
+                              {
+                                 "scenario" : "name",
+                                 "problem_qty" : "cell",
+                                 "problem_price" : "cell"
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            },
+            "energy_req" : {
+               "value" : "cell",
+               "unit" : "cell",
+               "analysis" : [
+                  {
+                     "analysisDate" : "date",
+                     "scenarios" : [
+                        {
+                           "scenario" : "name",
+                           "value" : "cell",
+                           "unit" : "cell"
+                        }
+                     ]
+                  }
+               ]
+            },
+            "hh_size" : "cell",
+            "staple" : {
+               "name" : "cell",
+               "food_energy" : "cell",
+               "price_bl" : "cell"
+            }
          }
       ]
-   },
-   "hh_size" : "cell",
-   "staple" : {
-      "name" : "cell",
-      "food_energy" : "cell",
-      "price_bl" : "cell"
-   },
-}
+   }
+]
