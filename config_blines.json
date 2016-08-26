@@ -1,58 +1,56 @@
-[
-   {
-      "lz_code" : "cell: integer",
-      "lz_name" : "cell: string",
-      "lz_abbrev" : "cell: string(5 chars)",
-      "geometry" : "WKB: projected",
-      "geography" : "WKB : 4326",
-      "wgs" : [
-         {
-            "fKey" : "objectId",
-            "wg_ord" : "sheet num: integer",
-            "wg_name" : "cell: string",
-            "wg_sheet" : "sheet: string",
-            "food" : {
-               "startValue" : "Sources of Food :",
-               "endValue" : "food deficit",
-               "data" : [
-                  {
-                     "item" : "cell",
-                     "baseline" : "cell",
-                     "expandability" : "cell"
-                  }
-               ]
-            },
-            "income" : {
-               "startValue" : "Income :",
-               "endValue" : "total:",
-               "data" : [
-                  {
-                     "item" : "cell",
-                     "expandability" : "cell"
-                  }
-               ]
-            },
-            "expenditure" : {
-               "startValue" : "Expenditure :",
-               "endValue" : "total:",
-               "data" : [
-                  {
-                     "item" : "cell",
-                     "expandability" : "cell"
-                  }
-               ]
-            },
-            "energyReq" : {
-               "value" : "cell",
-               "unit" : "cell",
-            },
-            "hhSize" : "cell",
-            "staple" : {
-               "name" : "cell",
-               "foodEnergy" : "cell",
-               "baselinePrice" : "cell"
-            }
+{
+   "lz_code" : "cell: integer",
+   "lz_name" : "cell: string",
+   "lz_abbrev" : "cell: string(5 chars)",
+   "geometry" : "WKB: projected",
+   "geography" : "WKB : 4326",
+   "wgs" : [
+      {
+         "fKey" : "objectId",
+         "wg_ord" : "sheet num: integer",
+         "wg_name" : "cell: string",
+         "wg_sheet" : "sheet: string",
+         "food" : {
+            "startValue" : "Sources of Food :",
+            "endValue" : "food deficit",
+            "data" : [
+               {
+                  "item" : "cell",
+                  "baseline" : "cell",
+                  "expandability" : "cell"
+               }
+            ]
+         },
+         "income" : {
+            "startValue" : "Income :",
+            "endValue" : "total:",
+            "data" : [
+               {
+                  "item" : "cell",
+                  "expandability" : "cell"
+               }
+            ]
+         },
+         "expenditure" : {
+            "startValue" : "Expenditure :",
+            "endValue" : "total:",
+            "data" : [
+               {
+                  "item" : "cell",
+                  "expandability" : "cell"
+               }
+            ]
+         },
+         "energyReq" : {
+            "value" : "cell",
+            "unit" : "cell",
+         },
+         "hhSize" : "cell",
+         "staple" : {
+            "name" : "cell",
+            "foodEnergy" : "cell",
+            "baselinePrice" : "cell"
          }
-      ]
-   }
-]
+      }
+   ]
+}

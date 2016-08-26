@@ -14,9 +14,10 @@ Spreadsheet structure:
    - On a particular Analysis date, there can be different **Hazards** or **Scenarios**. There are many Hazards or Scanerios to one Anaysis date
    - There Problems for **Quantity** and **Price** for Income Sources and Expenditure Items and **Quanitity** only for Food Sources.
 
-Data structure:
-   - I've split the data configurations into baselines (`config_blines.json`)and problem specificiations (`config_pspecs.json`). This means that the scraper will create two collections/tables: baselines and problemSpecs. This _greatly_ simplifies the data structure _but_ it makes the algorithm more complex as it will need to do a join between the collections. I have inserted a foreign key for each wealth group of the baseline and the analysis of the problemSpec will be tied to this.
-   - 
+Data structure and object templates in config JSON files:
+   - I've split the data configurations into baselines (`config_blines.json`)and problem specificiations (`config_pspecs.json`). This is because the baseline information is _static_ but the problem specs will change over time, each time an analysis is doen the problem spec will be redefined and needs to be stored. This means that the scraper will create two collections/tables: baselines and problemSpecs. This _greatly_ simplifies the data structure _but_ it makes the business logic and server app more complex as it will need to do a join between collections. I have inserted a foreign key for each wealth group of the baseline and the analysis of the problemSpec will be tied to this.
+   - The objects in the JSON config files will become documents/records loaded repeatedly into their respective collections/tables. If a JSON `MongoImport` documents were to be made from from the reads that follow these two templates, the documents would be elements of an array.
+   - The app server business logic may need to test the alignment of the problem spec items with the baseline items to ensure they are congruent, before applying the analysis algorithm.
 
 
 
