@@ -1,47 +1,45 @@
-[
-   {
-      "fKey" : "objectId",
-      "analysisDate" : "date",
-      "scenarios" : [
-         {
-            "scenario" : "name",
-            "food" : {
-               "startVal" : "Sources of Food :",
-               "endVal" : "food deficit",
-               "data" : [
-                  {
-                     "item" : "cell",
-                     "problemQty" : "cell",
-                  }
-               ]
-            },
-            "income" : {
-               "startValue" : "Income :",
-               "endValue" : "total:",
-               "data" : [
-                  {
-                     "item" : "cell",
-                     "problemQty" : "cell",
-                     "problemPrice" : "cell"
-                  }
-               ]
-            },
-            "expenditure" : {
-               "startValue" : "Expenditure :",
-               "endValue" : "total:",
-               "data" : [
-                  {
-                     "item" : "cell",
-                     "problemQty" : "cell",
-                     "problemPrice" : "cell"
-                  }
-               ]
-            },
-            "energyReq" : {
-               "value" : "cell",
-               "unit" : "cell"
-            }
+{
+   "fKey" : "objectId",
+   "analysisDate" : "date",
+   "scenarios" : [
+      {
+         "scenario" : "name",
+         "food" : {
+            "startVal" : "Sources of Food :",
+            "endVal" : "food deficit",
+            "data" : [
+               {
+                  "item" : "cell",
+                  "problemQty" : "cell",
+               }
+            ]
+         },
+         "income" : {
+            "startValue" : "Income :",
+            "endValue" : "total:",
+            "data" : [
+               {
+                  "item" : "cell",
+                  "problemQty" : "cell",
+                  "problemPrice" : "cell"
+               }
+            ]
+         },
+         "expenditure" : {
+            "startValue" : "Expenditure :",
+            "endValue" : "total:",
+            "data" : [
+               {
+                  "item" : "cell",
+                  "problemQty" : "cell",
+                  "problemPrice" : "cell"
+               }
+            ]
+         },
+         "energyReq" : {
+            "value" : "cell",
+            "unit" : "cell"
          }
-      ]
-   }
-]
+      }
+   ]
+}
