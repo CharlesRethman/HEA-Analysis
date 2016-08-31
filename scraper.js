@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-/*
+/**
  * @file_name: scraper.js
+ * @dependency xlsx v 0.8.x. Library for reading Excel spreadsheets synchronously (and
+ * asynchronously?). Available from NPM
+ * @dependency fs . Library for reading files synchronously or asynchronously (async used here).
+ * Built into Node.JS 4.2.x
  *
  */
 
@@ -10,7 +14,7 @@ var XLSX = require('xlsx'), pg = require('pg');
 const fs = require('fs');
 
 
-/*
+/**
  * Get any other user input such as user name, required dates or yes/no options. Data format can
  * also be defined in the 'format' parameter (using a RegExp).
  *
