@@ -11,35 +11,44 @@
          "wg_name" : "cell: string",
          "wg_sheet" : "sheet: string",
          "food" : {
-            "startValue" : "Sources of Food :",
-            "endValue" : "food deficit",
+            "startValues" : ["Sources of Food :"],
+            "endValues" : ["food deficit"],
             "data" : [
                {
                   "item" : "cell",
                   "baseline" : "cell",
-                  "expandability" : "cell"
+                  "expandability" : "cell",
+                  "maxAccess" : "calc"
                }
-            ]
+            ],
+            "total" : "calc"
          },
          "income" : {
-            "startValue" : "Income :",
-            "endValue" : "total:",
+            "startValues" : ["Income :"],
+            "endValues" : ["total:"],
             "data" : [
                {
                   "item" : "cell",
-                  "expandability" : "cell"
+                  "expandability" : "cell",
+                  "maxAccess" : "calc"
                }
-            ]
+            ],
+            "total" : "calc"
          },
          "expenditure" : {
-            "startValue" : "Expenditure :",
-            "endValue" : "total:",
+            "startValues" : ["Expenditure :"],
+            "endValues" : ["total:"],
             "data" : [
                {
                   "item" : "cell",
-                  "expandability" : "cell"
+                  "expandability" : "cell",
+                  "minAccess" : "calc"
                }
-            ]
+            ],
+            "total" : "calc",
+            "foodPoverty" : "calc",
+            "lowerBoundPoverty" : "calc",
+            "upperBoundPoverty" : "calc"
          },
          "energyReq" : {
             "value" : "cell",

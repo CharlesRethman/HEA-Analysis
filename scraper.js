@@ -136,3 +136,5 @@ function readSpreadSheets(sqlString, lzAbbrevs, deficits, ofa) {
       sqlString = sqlString.substring(0, sqlString.length - 2) + '\n;';
       return sqlString
 }
+
+//Exports

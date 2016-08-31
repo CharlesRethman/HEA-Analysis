@@ -5,36 +5,54 @@
       {
          "scenario" : "name",
          "food" : {
-            "startVal" : "Sources of Food :",
-            "endVal" : "food deficit",
+            "startVals" : ["Sources of Food :"],
+            "endVals" : ["food deficit"],
             "data" : [
                {
                   "item" : "cell",
                   "problemQty" : "cell",
+                  "consProblem" : "calc",
+                  "currMaxAccess" : "calc",
+                  "currAccess" : "calc"
                }
-            ]
+            ],
+            "currTotal" : "calc",
+            "currEnergyDeficit" : "calc",
+            "currFoodPovertyDeficit" : "calc"
          },
          "income" : {
-            "startValue" : "Income :",
-            "endValue" : "total:",
+            "startValues" : ["Income :"],
+            "endValues" : ["total:"],
             "data" : [
                {
                   "item" : "cell",
                   "problemQty" : "cell",
-                  "problemPrice" : "cell"
+                  "problemPrice" : "cell",
+                  "consProblem" : "calc",
+                  "currMaxAccess" : "calc",
+                  "currAccess" : "calc"
                }
-            ]
+            ],
+            "currTotal" : "calc"
          },
          "expenditure" : {
-            "startValue" : "Expenditure :",
-            "endValue" : "total:",
+            "startValues" : ["Expenditure :"],
+            "endValues" : ["total:"],
             "data" : [
                {
                   "item" : "cell",
                   "problemQty" : "cell",
-                  "problemPrice" : "cell"
+                  "problemPrice" : "cell",
+                  "consProblem" : "calc",
+                  "currMinAccess" : "calc",
+                  "currAccess" : "calc"
                }
-            ]
+            ],
+            "currTotal" : "calc",
+            "foodEnergy" : "calc",
+            "foodPoverty" : "calc",
+            "lowerBoundPoverty" : "calc",
+            "upperBoundPoverty" : "calc"
          },
          "energyReq" : {
             "value" : "cell",
