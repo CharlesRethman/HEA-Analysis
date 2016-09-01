@@ -7,7 +7,7 @@
    "repository" : "https://github.com/CharlesRethman/HEA-Analysis/tree/master/pop",
    "dependencies" : {
       "xlsx" : "0.8.x",
-      "pg" : "4.5.x",
+      "pg" : "4.5.x"
    },
    "engine" : "node 4.2.x",
    "main" : "scraper.js",
