@@ -6,7 +6,7 @@
  */
 
 // require local modules: connect to db, spreadsheet scraper
-var db = require('pg_connector.js'), scraper = require('scraper.js');
+var PG = require('./pgConnector'), Scraper = require('./scraper');
 
 
 // call module for connecting to db
@@ -18,16 +18,17 @@ var db = require('pg_connector.js'), scraper = require('scraper.js');
  *
  */
 // Get the DB user name
-ask('\nYou may need account credentials to connect to Postgres. However, if you\ndownloaded the database dump file from GitHub, you can ignore the password\nbelow (skip by pressing ENTER twice)\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
+pg = new PG.PgConnector;
+pg.ask('\nYou may need account credentials to connect to Postgres. However, if this is not\nthe case, you can ignore the login role or the password below by just pressing\nENTER on each.\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
    if (!cancel) {
       // Get the DB password
-      getPassword('Postgres password', function(cancel, password) {
+      pg.getPassword('Postgres password', function(cancel, password) {
          // pass the user name and password as a connection string onto Postgres in the main data
          // processing function
          if (!cancel) {
-            var client = new pg.Client('postgres://' + user_name + ':' + password + '@localhost:5432/albers_ea');
+            var client = pg.client('postgres://' + user_name + ':' + password + '@localhost:5432/albers_ea');
             // Go through to slecting the month and year of analysis
-            connectDB(client);
+            pg.connectDB(client);
          }
       });
    }
