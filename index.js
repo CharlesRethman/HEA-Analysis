@@ -6,7 +6,7 @@
  */
 
 // require local modules: connect to db, spreadsheet scraper
-var Pg = require('./pgConnector'), Scraper = require('./scraper');
+var Pg = require('./pgConnector'), Std = require('./stdInOut');
 
 
 // call module for connecting to db
@@ -19,15 +19,16 @@ var Pg = require('./pgConnector'), Scraper = require('./scraper');
  */
 // Get the DB user name
 pg = new Pg.PgConnector;
-pg.ask('\nYou may need account credentials to connect to Postgres. However, if this is not\nthe case, you can ignore the login role or the password below by just pressing\nENTER on each.\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
+std = new Std;
+std.ask('\nYou may need account credentials and to connect to Postgres. However, if this is not\nthe case, you can ignore the login role or the password below by just pressing\nENTER on each. The default database is \'public\'.\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
    if (!cancel) {
       // Get the DB password
-      pg.getPassword('Password', function(cancel, password) {
+      std.getPassword('Password', function(cancel, password) {
          // pass the user name and password as a connection string onto Postgres in the main data
          // processing function
          if (!cancel) {
-            pg.ask('Database', function(cancel, db_name) {
-               var client = pg.client('postgres://' + user_name + ':' + password + '@localhost:5432/' + db_name);
+            std.ask('Database', /.+|\s/, function(cancel, db_name) {
+               var client = pg.client('postgres://' + user_name + ':' + password + '@localhost:5432/' + (db_name === '' ? 'public' : db_name));
                // Go through to slecting the month and year of analysis
                pg.connectDB(client);
             });
