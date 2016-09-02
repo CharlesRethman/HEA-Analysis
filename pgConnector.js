@@ -13,6 +13,36 @@ PgConnector = function(db) {
    this.db = db
 };
 
+PgConnector.prototype.queryAnalyses = function(pgClient) {
+   // Query the database to find out how many analyses have been done before
+   pgClient.query('SELECT ofa_month, ofa_year, count(*) AS result FROM zaf.tbl_ofa_analysis GROUP BY ofa_year, ofa_month ORDER BY ofa_year, ofa_month;', function(err, result) {
+      if(err) {
+         return console.error('error retrieving analyses', err);
+      }
+      // Success
+      // Array to hold the names of months: name = months[n -1], where n is the month number (0-12)
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      // print out the table headers
+      console.log('\nYour existing analysis are:');
+      console.log('OFA Month     | OFA Year |   results\n--------------+----------+-----------');
+      // print out the results, nicely formatted with padding to line up the columns
+      for (i = 0; i < result.rowCount; i++) {
+         // padding on first column
+         var pad_month = '';
+         // padding on second column
+         var pad_result = '';
+         // first (month) column: subtract the length of the month name from 8 + the length of the month number (1:1 to 10 or 2:10 to 12) and add that number of spaces to the pad
+         for (j = 0; j < 8 + (result.rows[i].ofa_month < 10 ? 1 : 0 ) - (months[result.rows[i].ofa_month - 1]).length; j++) pad_month+= ' ';
+         // third (results) column: subtract the length og the number from 10 and add that number of spaces to the pad
+         for (j = 0; j < 10 - (' ' + result.rows[i].result).length; j++) pad_result += ' ';
+         // print out the results
+         console.log(result.rows[i].ofa_month + ' (' + months[result.rows[i].ofa_month - 1] + ')' + pad_month + ' |     ' + result.rows[i].ofa_year + ' | ' + pad_result + result.rows[i].result);
+      }
+      // print out the footer
+      console.log('--------------+----------+-----------');
+   });
+};
+
 /*
  * Connects to the DB and selects which analysis (month, year) the user wants load into it.
  *
@@ -26,74 +56,8 @@ PgConnector.prototype.connectDB = function(pgClient) {
       if(err) {
          return console.error('could not connect to postgres:\n', err);
       }
-      // Query the database to find out how many analyses have been done before
-      pgClient.query('SELECT ofa_month, ofa_year, count(*) AS result FROM zaf.tbl_ofa_analysis GROUP BY ofa_year, ofa_month ORDER BY ofa_year, ofa_month;', function(err, result) {
-         if(err) {
-            return console.error('error retrieving analyses', err);
-         }
-         // Success
-         // Array to hold the names of months: name = months[n -1], where n is the month number (0-12)
-         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-         // print out the table headers
-         console.log('\nYour existing analysis are:');
-         console.log('OFA Month     | OFA Year |   results\n--------------+----------+-----------');
-         // print out the results, nicely formatted with padding to line up the columns
-         for (i = 0; i < result.rowCount; i++) {
-            // padding on first column
-            var pad_month = '';
-            // padding on second column
-            var pad_result = '';
-            // first (month) column: subtract the length of the month name from 8 + the length of the month number (1:1 to 10 or 2:10 to 12) and add that number of spaces to the pad
-            for (j = 0; j < 8 + (result.rows[i].ofa_month < 10 ? 1 : 0 ) - (months[result.rows[i].ofa_month - 1]).length; j++) pad_month+= ' ';
-            // third (results) column: subtract the length og the number from 10 and add that number of spaces to the pad
-            for (j = 0; j < 10 - (' ' + result.rows[i].result).length; j++) pad_result += ' ';
-            // print out the results
-            console.log(result.rows[i].ofa_month + ' (' + months[result.rows[i].ofa_month - 1] + ')' + pad_month + ' |     ' + result.rows[i].ofa_year + ' | ' + pad_result + result.rows[i].result);
-         }
-         // print out the footer
-         console.log('--------------+----------+-----------');
-         // Get the month and year of the analysis
-         ask('Which month and year of analysis do you want to assign to these spreadsheets?\nType it in as numbers representing M-YYYY (e.g. 9-2013 or 11-2015) ', /\d{1,2}-\d{4}/, function(cancel, analysisMonth) {
-            if (!cancel) {
-               var d = new Date(), check = false, deleteOnly = false;
-               var ofa = analysisMonth.split('-');
-               // Force to current month and year if supplied values are out of range
-               if (ofa[0] * 1 > 12) ofa[0]= 12;
-               if (ofa[0] * 1 < 1) ofa[0] = 1;
-               if (new Date(ofa[1], ofa[0]-1, 1) > d || ofa[1] * 1 < 1980 ) {
-                  ofa[0] = d.getMonth() + 1;
-                  ofa[1] = d.getFullYear();
-                  console.log('Analysis reset to ' + ofa[0] + '-' + ofa[1] + '; it cannot be ahead of time or before 1980.');
-               }
-               for (i = 0; i < result.rowCount; i++) {
-                  if (ofa[0] == result.rows[i].ofa_month && ofa[1] == result.rows[i].ofa_year) {
-                     var check = true;
-                     break;
-                  }
-               }
-               if (check) {
-                  ask('This analysis already exists. Delete only (yes - just delete / no - delete and\nreinsert data)?', /.+/, function(cancel, justDel) {
-                     if (!cancel) {
-                        if (justDel.toUpperCase() == 'Y' || justDel.toUpperCase() == 'YES') deleteOnly = true
-                        ask('Are you REALLY sure you want to delete all your previous data for ' + months[ofa[0] - 1] + ' ' + ofa[1] + '\n(yes - proceed / no - quit before affecting anything)?', /.+/, function(cancel, confirm) {
-                           if (!cancel) {
-                              if (confirm.toUpperCase() == 'Y' || confirm.toUpperCase() == 'YES') {
-                                 // Call the loadTable function
-                                 loadTable(pgClient, ofa, deleteOnly);
-                              } else {
-                                 pgClient.end();
-                                 process.exit();
-                              }
-                           }
-                        });
-                     }
-                  });
-               } else {
-                  loadTable(pgClient, ofa, false);
-               }
-            }
-         });
-      });
+      PgConnector.queryAnalyses(pgClient)
+      return
    });
 };
 
