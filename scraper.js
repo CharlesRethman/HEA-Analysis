@@ -10,65 +10,11 @@
  */
 
 
-const XLSX = require('xlsx')
+const XLSX = require('xlsx');
 const fs = require('fs');
 
-
-
-/*
- * Deletes previous record for the same analysis date and uploads the current analysis results
- * collected from the spreadsheets.
- *
- * @param pgClient {Object}. Required. Postgres client connection object must be passed.
- * @param ofa {Array} Required. Two elements with numbers representing month ofa[0] ('1' = January)
- * and year ofa[1].
- * @param deleteOnly {Boolean}. Optional. TRUE when data for analysis are deleted but not reinserted.
- * Default FALSE.
- *
- */
-function loadTable(pgClient, ofa, deleteOnly) {
-   // Query to first delete existing data in zaf.tbl_ofa_analysis for the desired month and year
-   pgClient.query('DELETE FROM zaf.tbl_ofa_analysis WHERE ofa_year = ' + ofa[1] + ' AND ofa_month = ' + ofa[0] + ';', function(err, result) {
-      if(err) {
-         return console.error('error running DELETE query', err);
-      }
-      // Success. Output is something like DELETE: 1168 rows affected
-      console.log(result.command + ': ' + result.rowCount + ' rows affected');
-      // Query to insert the new data using the SQL string above
-      if (!deleteOnly) {
-         // Create the INSERT SQL String
-         var sqlString = 'INSERT INTO zaf.tbl_ofa_analysis (ofa_year, ofa_month, lz_code, wg_code, ' + 'lz_affected, wg_affected, threshold, deficit) VALUES \n';
-         // Read the config files containing info on analysis spreadsheets and deficits.
-         // Read the config file for the spreadsheet structure
-         fs.readFile("./config_blines.json", function(err, blinesData) {
-            if (err) {
-                  console.log("LZ and spreadsheet config file missing or corrupt.");
-                  return;
-            }
-            // Success. Read the config file for thresholds
-            fs.readFile("./config_pspecs.json", function(err, pSpecsData) {
-               if (err) {
-                  console.log("Deficits config file missing or corrupt.");
-                  return
-               }
-               // Success. Parse the files and pass (sic!) them on to the readSpreadSheets function
-               sqlString = readSpreadSheets(sqlString, JSON.parse(sSheetData.toString()), JSON.parse(deficitsData.toString()), ofa);
-               pgClient.query(sqlString, function(err, result) {
-                  if(err) {
-                     return console.error('error running INSERT query', err);
-                  }
-                  // Success. Output is something like INSERT: 1168 rows affected
-                  console.log(result.command + ': ' + result.rowCount + ' rows affected');
-                  getDbTime(pgClient);
-               });
-            });
-         });
-      } else {
-         getDbTime(pgClient);
-      }
-   });
-}
-
+Scrape = function(){
+};
 
 /*
  * Read all the spreadsheet values and load them into an object, as well as creating an SQL INSERT
@@ -80,7 +26,7 @@ function loadTable(pgClient, ofa, deleteOnly) {
  * and year ofa[1].
  *
  */
-function readSpreadSheets(sqlString, lzAbbrevs, deficits, ofa) {
+Scrape.prototype.readSpreadSheets = function (sqlString, lzAbbrevs, deficits, ofa) {
    console.log('Reading spreadsheets...');
          // Object with the LZ affectedness groupings.
          var lzAffected = {
@@ -135,6 +81,7 @@ function readSpreadSheets(sqlString, lzAbbrevs, deficits, ofa) {
       // Query SQL string for inserting data into zaf.tbl_ofa_analysis postgres table
       sqlString = sqlString.substring(0, sqlString.length - 2) + '\n;';
       return sqlString
-}
+};
 
 //Exports
+exports.Scrape = Scrape;

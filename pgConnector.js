@@ -5,15 +5,21 @@
  *
  */
 
+//'use strict';
 
 var pg = require('pg');
+var Std = require('./stdInOut.js');
+var Scraper = require('./scraper.js');
 const fs = require('fs');
 
 PgConnector = function(db) {
    this.db = db
 };
 
-PgConnector.prototype.queryAnalyses = function(pgClient) {
+var std = new Std.StdInOut;
+var scrape = new Scraper.Scrape;
+
+function queryAnalyses(pgClient) {
    // Query the database to find out how many analyses have been done before
    pgClient.query('SELECT ofa_month, ofa_year, count(*) AS result FROM zaf.tbl_ofa_analysis GROUP BY ofa_year, ofa_month ORDER BY ofa_year, ofa_month;', function(err, result) {
       if(err) {
@@ -40,24 +46,47 @@ PgConnector.prototype.queryAnalyses = function(pgClient) {
       }
       // print out the footer
       console.log('--------------+----------+-----------');
-   });
-};
-
-/*
- * Connects to the DB and selects which analysis (month, year) the user wants load into it.
- *
- * @param pgClient {Object}. Required. Postgres client object with connection string credentials in
- * it must be passed.
- *
- */
-PgConnector.prototype.connectDB = function(pgClient) {
-   // Connect the client to the database
-   pgClient.connect(function(err) {
-      if(err) {
-         return console.error('could not connect to postgres:\n', err);
-      }
-      PgConnector.queryAnalyses(pgClient)
-      return
+      // Get the month and year of the analysis
+      std.ask('Which month and year of analysis do you want to assign to these spreadsheets?\nType it in as numbers representing M-YYYY (e.g. 9-2013 or 11-2015) ', /\d{1,2}-\d{4}/, function(cancel, analysisMonth) {
+         if (!cancel) {
+            var d = new Date(), check = false, deleteOnly = false;
+            var ofa = analysisMonth.split('-');
+            // Force to current month and year if supplied values are out of range
+            if (ofa[0] * 1 > 12) ofa[0]= 12;
+            if (ofa[0] * 1 < 1) ofa[0] = 1;
+            if (new Date(ofa[1], ofa[0]-1, 1) > d || ofa[1] * 1 < 1980 ) {
+               ofa[0] = d.getMonth() + 1;
+               ofa[1] = d.getFullYear();
+               console.log('Analysis reset to ' + ofa[0] + '-' + ofa[1] + '; it cannot be ahead of time or before 1980.');
+            }
+            for (i = 0; i < result.rowCount; i++) {
+               if (ofa[0] == result.rows[i].ofa_month && ofa[1] == result.rows[i].ofa_year) {
+                  var check = true;
+                  break;
+               }
+            }
+            if (check) {
+               std.ask('This analysis already exists. Delete only (yes - just delete / no - delete and\nreinsert data)?', /.+/, function(cancel, justDel) {
+                  if (!cancel) {
+                     if (justDel.toUpperCase() == 'Y' || justDel.toUpperCase() == 'YES') deleteOnly = true
+                     std.ask('Are you REALLY sure you want to delete all your previous data for ' + months[ofa[0] - 1] + ' ' + ofa[1] + '\n(yes - proceed / no - quit before affecting anything)?', /.+/, function(cancel, confirm) {
+                        if (!cancel) {
+                           if (confirm.toUpperCase() == 'Y' || confirm.toUpperCase() == 'YES') {
+                              // Call the loadTable function
+                              loadTable(pgClient, ofa, deleteOnly);
+                           } else {
+                              pg.pgClient.end();
+                              process.exit();
+                           }
+                        }
+                     });
+                  }
+               });
+            } else {
+               loadTable(pgClient, ofa, false);
+            }
+         }
+      });
    });
 };
 
@@ -73,7 +102,7 @@ PgConnector.prototype.connectDB = function(pgClient) {
  * Default FALSE.
  *
  */
-PgConnector.prototype.loadTable = function(pgClient, ofa, deleteOnly) {
+function loadTable(pgClient, ofa, deleteOnly) {
    // Query to first delete existing data in zaf.tbl_ofa_analysis for the desired month and year
    pgClient.query('DELETE FROM zaf.tbl_ofa_analysis WHERE ofa_year = ' + ofa[1] + ' AND ofa_month = ' + ofa[0] + ';', function(err, result) {
       if(err) {
@@ -96,10 +125,10 @@ PgConnector.prototype.loadTable = function(pgClient, ofa, deleteOnly) {
             fs.readFile("./config_deficits.json", function(err, deficitsData) {
                if (err) {
                   console.log("Deficits config file missing or corrupt.");
-                  return
+                  return;
                }
                // Success. Parse the files and pass (sic!) them on to the readSpreadSheets function
-               sqlString = readSpreadSheets(sqlString, JSON.parse(sSheetData.toString()), JSON.parse(deficitsData.toString()), ofa);
+               sqlString = scrape.readSpreadSheets(sqlString, JSON.parse(sSheetData.toString()), JSON.parse(deficitsData.toString()), ofa);
                pgClient.query(sqlString, function(err, result) {
                   if(err) {
                      return console.error('error running INSERT query', err);
@@ -124,7 +153,7 @@ PgConnector.prototype.loadTable = function(pgClient, ofa, deleteOnly) {
  * @param pgClient {Object}. Required. Postgres client connection object must be passed.
  *
  */
-PgConnector.prototype.getDbTime = function(pgClient) {
+function getDbTime(pgClient) {
   // Query to get a time stamp from the DB(!) for the succesful completion of the work
   pgClient.query('SELECT NOW() AS "theTime"', function(err, result) {
     if(err) {
@@ -138,6 +167,26 @@ PgConnector.prototype.getDbTime = function(pgClient) {
     });
 
 };
+
+
+/*
+ * Connects to the DB and selects which analysis (month, year) the user wants load into it.
+ *
+ * @param pgClient {Object}. Required. Postgres client object with connection string credentials in
+ * it must be passed.
+ *
+ */
+PgConnector.prototype.connectDB = function(pgClient) {
+   // Connect the client to the database
+   pgClient.connect(function(err) {
+      if(err) {
+         return console.error('could not connect to postgres:\n', err);
+      }
+      queryAnalyses(pgClient);
+      return
+   });
+};
+
 
 PgConnector.prototype.client = function(connString) {
    return new pg.Client(connString);
