@@ -1,6 +1,6 @@
-StdInOut = function(param){
-   console.log(param);
-   this.param = param;
+StdInOut = function(){
+//   console.log(param);
+//   this.param = param;
 };
 
 /*

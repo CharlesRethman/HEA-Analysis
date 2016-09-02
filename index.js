@@ -19,8 +19,8 @@ var Pg = require('./pgConnector'), Std = require('./stdInOut');
  */
 // Get the DB user name
 pg = new Pg.PgConnector;
-std = new Std;
-std.ask('\nYou may need account credentials and to connect to Postgres. However, if this is not\nthe case, you can ignore the login role or the password below by just pressing\nENTER on each. The default database is \'public\'.\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
+std = new Std.StdInOut;
+std.ask('\nYou may need account credentials and to connect to Postgres. However, if this is not\nthe case, you can ignore the login role or the password below by just pressing\nENTER on each. The default database is \'postgres\'.\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
    if (!cancel) {
       // Get the DB password
       std.getPassword('Password', function(cancel, password) {
@@ -28,7 +28,8 @@ std.ask('\nYou may need account credentials and to connect to Postgres. However,
          // processing function
          if (!cancel) {
             std.ask('Database', /.+|\s/, function(cancel, db_name) {
-               var client = pg.client('postgres://' + user_name + ':' + password + '@localhost:5432/' + (db_name === '' ? 'public' : db_name));
+               var client = pg.client('postgres://' + user_name + ':' + password + '@localhost:5432/' + (db_name === '' ? 'postgres' : db_name));
+               console.log('Connection string = ', 'postgres://' + user_name + ':' + password + '@localhost:5432/' + (db_name === '' ? 'postgres' : db_name));
                // Go through to slecting the month and year of analysis
                pg.connectDB(client);
             });

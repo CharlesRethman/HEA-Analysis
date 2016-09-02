@@ -24,7 +24,7 @@ PgConnector.prototype.connectDB = function(pgClient) {
    // Connect the client to the database
    pgClient.connect(function(err) {
       if(err) {
-         return console.error('could not connect to postgres', err);
+         return console.error('could not connect to postgres:\n', err);
       }
       // Query the database to find out how many analyses have been done before
       pgClient.query('SELECT ofa_month, ofa_year, count(*) AS result FROM zaf.tbl_ofa_analysis GROUP BY ofa_year, ofa_month ORDER BY ofa_year, ofa_month;', function(err, result) {
