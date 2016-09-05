@@ -5,6 +5,12 @@
  *
  */
 
+ // Load required packages
+ var express = require('express');
+ var mongoose = require('mongoose');
+ var bodyParser = require('body-parser');
+
+
 // require local modules: connect to db, spreadsheet scraper
 var Pg = require('./pgConnector'), Std = require('./stdInOut');
 
