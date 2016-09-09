@@ -5,12 +5,13 @@
 
 
 var expect = require('chai').expect;
-var tags = require('../lib/scaper.js');
+var scraper = require('../lib/scaper.js');
 
 describe('Scraper', function() {
-   describe('#sheets', function() {
+   describe('#check', function() {
       it('should get a list of all the sheets', function() {
-         var args = [
+         this.timeout(3000);
+         var sheets = [
             '../data/spreadsheets/za_fw_0.xlsx',
             '../data/spreadsheets/za_fw_0_nogrants.xlsx',
             '../data/spreadsheets/za_fw_1.xlsx',
@@ -31,7 +32,12 @@ describe('Scraper', function() {
             '../data/spreadsheets/za3xx_0_nogrants.xlsx',
             '../data/spreadsheets/za3xx_1.xlsx',
             '../data/spreadsheets/za3xx_1_nogrants.xlsx'
-         ]
+         ];
+         scaper.check(sheets, function(err, sheetlist) {
+            
+         });
+
+         expect(results).to.have.a.property()
 
       });
    });
