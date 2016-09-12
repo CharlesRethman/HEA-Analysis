@@ -1,39 +1,71 @@
 #!/usr/local/bin/node
 
 /*
- * @file_name: index.js
+ * @file_name: server.js
  *
  */
 
+// Load required packages
+var express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var passport = require('passport');
 
-// require local modules: connect to db, spreadsheet scraper
-var Pg = require('./pgConnector'), Std = require('./stdInOut');
+
+// Connect to the beerlocker MongoDB
+mongoose.connect('mongodb://localhost:27017/ofa');
+
+// Create our Express application
+var app = express();
+
+// Set view engine to jade
+app.set('view engine', 'jade');
+
+// Use the body-parser package in our application
+app.use(bodyParser.urlencoded({
+ 	extended: true
+}));
+
+// Use express session support since OAuth2orize requires it
+app.use(session({
+ 	secret: 'Super Secret Session Key',
+   saveUninitialized: true,
+   resave: true
+}));
+
+// Use the passport package in our application
+app.use(passport.initialize());
 
 
-// call module for connecting to db
+// Create our Express router
+var router = express.Router();
 
-/*
- * Callers for getting user inputs for connecting to the database. Upon entry of credentials, the
- * `connectDB` function is called with the a client object for connecting to the database. No
- * authentication/authorisation at this stage.
+ // Create endpoint handlers
+/**
+ * Routes to spreadsheet resources added in here.
  *
  */
-// Get the DB user name
-pg = new Pg.PgConnector;
-std = new Std.StdInOut;
-std.ask('\nYou may need account credentials and to connect to Postgres. However, if this is not\nthe case, you can ignore the login role or the password below by just pressing\nENTER on each. The default database is \'postgres\'.\n\nPostgres user name', /.+|\s/, function(cancel, user_name) {
-   if (!cancel) {
-      // Get the DB password
-      std.getPassword('Password', function(cancel, password) {
-         // pass the user name and password as a connection string onto Postgres in the main data
-         // processing function
-         if (!cancel) {
-            std.ask('Database', /.+|\s/, function(cancel, db_name) {
-               var client = pg.client('postgres://' + user_name + ':' + password + '@localhost:5432/' + (db_name === '' ? 'postgres' : db_name));
-               // Go through to slecting the month and year of analysis
-               pg.connectDB(client);
-            });
-         };
-      });
-   }
-});
+
+// Create endpoint handlers for /users
+router.route('/users')
+ 	.post(userController.postUsers)
+   .get(authController.isAuthenticated, userController.getUsers);
+
+// Create endpoint handlers for /clients
+router.route('/clients')
+   .post(authController.isAuthenticated, clientController.postClients)
+   .get(authController.isAuthenticated, clientController.getClients);
+
+// Create endpoint handlers for oauth2 authorize
+router.route('/oauth2/authorize')
+ .get(authController.isAuthenticated, oauth2Controller.authorization)
+   .post(authController.isAuthenticated, oauth2Controller.decision);
+
+
+// Creaate endpoint handlers for oauth2 token
+router.route('/oauth2/token')
+   .post(authController.isClientAuthenticated, oauth2Controller.token);
+
+
+// Register all our routes with /api
+app.use('/api', router);
