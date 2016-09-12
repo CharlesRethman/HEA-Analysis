@@ -17,11 +17,13 @@
     "pg": "4.5.x",
     "xlsx": "^0.8.0"
   },
-  "engine": "node 4.2.x",
+  "engine": "node 6.5.x",
   "main": "index.js",
   "version": "0.0.1",
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "chromedriver": "^2.24.1",
     "selenium-webdriver": "^3.0.0-beta-2"
   }
 }
