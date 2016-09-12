@@ -22,7 +22,6 @@
   "version": "0.0.1",
   "devDependencies": {
     "chai": "^3.5.0",
-    "selenium": "^2.20.0",
     "selenium-webdriver": "^3.0.0-beta-2"
   }
 }

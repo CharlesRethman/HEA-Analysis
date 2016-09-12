@@ -5,7 +5,12 @@
 
 
 var expect = require('chai').expect;
-var webdriver = require('selenium-WebDriver'), By = webdriver.By, until = webdriver.until;
+var webdriver = require('selenium-webdriver')
+
+before ->
+   @timeout 10000;
+   @driver = new selenium.Builder()
+, By = webdriver.By, until = webdriver.until;
 
 
 describe('Index', function() {
