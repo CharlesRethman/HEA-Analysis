@@ -17,8 +17,16 @@ test.describe('Index', function() {
    });
 
    test.it('should work', function() {
-      driver.get('http://localhost:3000');
+      driver.get('http://localhost:8000');
+//      driver.wait(function() {
+//      }, 3000);
+   });
 
+   test.it('should retrieve the heading', function() {
+      driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
+//         console.log('Text is:', text);
+         expect(text).to.equal('It worked!');
+      });
    });
 
    test.after(function() {
