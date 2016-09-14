@@ -12,24 +12,24 @@ test.describe('Index', function() {
    this.timeout(15000);
    var driver;
 
-   test.before(function() {
+   test.before(() => {
       driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
    });
 
-   test.it('should work', function() {
-      driver.get('http://localhost:8000');
+   test.it('should open the browser', () => {
+      driver.get('http://localhost:3000');
 //      driver.wait(function() {
 //      }, 3000);
    });
 
-   test.it('should retrieve the heading', function() {
+   test.it('should retrieve the heading', () => {
       driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
 //         console.log('Text is:', text);
          expect(text).to.equal('It worked!');
       });
    });
 
-   test.after(function() {
+   test.after(() => {
       driver.quit();
    });
 });
