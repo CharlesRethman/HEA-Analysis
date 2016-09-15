@@ -44,6 +44,7 @@ test.describe('Index', function() {
       element.getAttribute('size').then(function(value) {
          expect(value).to.equal("60");
       });
+      element.sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/');
    });
 
    test.it('should have a \'Browse\' button', function() {
@@ -61,8 +62,12 @@ test.describe('Index', function() {
    });
 
 
-   test.it('should load a path into the text box', function() {
-      driver.findElement(webdriver.By.id('txtPathToFile')).sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/');
+   test.it('The path should be made default for the choose', function() {
+      element = driver.findElement(webdriver.By.id('btnChooseFile'));
+      element.click().then(function(value) {
+         console.log(element.finally);
+      });
+
 //      driver.wait(function() {
 //         expect(true).to.equal(true);
 //      }, 10000);
