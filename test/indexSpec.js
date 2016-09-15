@@ -44,15 +44,17 @@ test.describe('Index', function() {
       element.getAttribute('size').then(function(value) {
          expect(value).to.equal("60");
       });
-      element.sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/');
+//      element.sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_1.xlsx');
    });
 
-   test.it('should have a \'Browse\' button', function() {
-      driver.findElement(webdriver.By.id('btnChooseFile')).getAttribute("accept").then(function(text) {
+   test.it('should have a \'Choose file\' button', function() {
+      element = driver.findElement(webdriver.By.id('btnChooseFile'));
+      element.getAttribute("accept").then(function(text) {
          var arr = text.split(',');
          arr = arr.sort();
          expect(arr).to.deep.equal(['.xls','.xlsx']);
       });
+      element.sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_1.xlsx');
    });
 
    test.it('should a have an \'Upload\' button', function() {
@@ -62,15 +64,20 @@ test.describe('Index', function() {
    });
 
 
-   test.it('The path should be made default for the choose', function() {
-      element = driver.findElement(webdriver.By.id('btnChooseFile'));
-      element.click().then(function(value) {
-         console.log(element.finally);
-      });
+/*   test.it('The path should be set by the choose button', function() {
+      element = driver.findElement(webdriver.By.id('btnChooseFile'))
 
 //      driver.wait(function() {
-//         expect(true).to.equal(true);
-//      }, 10000);
+         element.getAttribute('value').then(function(text) {
+            text = 'za2xx_1.xlsx'
+            console.log(text);
+         });
+//      }, 3000);
+
+      driver.findElement(webdriver.By.id('txtPathToFile')).getAttribute('value').then(function(text) {
+         console.log(text);
+      });
+
    });
 
 /*   test.it('should a have a submit button', function() {
@@ -80,6 +87,6 @@ test.describe('Index', function() {
    })*/
 
    test.after(function() {
-      driver.quit();
+//      driver.quit();
    });
 });
