@@ -25,7 +25,7 @@ app.use(express.static('views'));
 //}));
 
 // respond to GET with a small piece of HTML
-app.get('/lolto', (req, res) => {
+app.get('/testRoute', (req, res) => {
    res.send('<html><body><h1>It worked!</h1></body></html>')
 });
 

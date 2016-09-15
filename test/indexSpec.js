@@ -38,9 +38,13 @@ test.describe('Index', function() {
       });
    });
 
-   test.it('should have a single-line text input box', function() {
-      driver.findElement(webdriver.By.id('txtPathToFile')).getAttribute('placeholder').then(function(text) {
+   test.it('should have a single-line text input box, size 60, with \'path/to/file/\' shown in it', function() {
+      var element = driver.findElement(webdriver.By.id('txtPathToFile'));
+      element.getAttribute('placeholder').then(function(text) {
          expect(text).to.contain('/path/to/file/');
+      });
+      element.getAttribute('size').then(function(value) {
+         expect(value).to.equal("60");
       });
    });
 
@@ -52,14 +56,12 @@ test.describe('Index', function() {
       });
    });
 
-   test.it('should a have a submit button', function() {
+   test.it('should a have an \'Upload\' button', function() {
       driver.findElement(webdriver.By.id('btnUploadFile')).getAttribute('value').then(function(text) {
          expect(text).to.contain('Upload');
       });
    });
 
-// engage@siliconcape.com
-// thokomiya17@gmail.com
 
 
 //      });
