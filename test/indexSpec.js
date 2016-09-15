@@ -21,8 +21,6 @@ test.describe('Index', function() {
       driver.getTitle().then(function(title) {
          expect(title).to.contain('Load spreadsheet')
       })
-//      driver.wait(function() {
-//      }, 3000);
    });
 
    test.it('should retrieve the heading', function() {
@@ -63,14 +61,14 @@ test.describe('Index', function() {
    });
 
 
+   test.it('should load a path into the text box', function() {
+      driver.findElement(webdriver.By.id('txtPathToFile')).sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/');
+//      driver.wait(function() {
+//         expect(true).to.equal(true);
+//      }, 10000);
+   });
 
-//      });
-/*
-   test.it('should have a single-line text input box', function() {
-      driver.findElement(webdriver.By.name('pathToFile').sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_0.xlsx');
-   })
-
-   test.it('should a have a submit button', function() {
+/*   test.it('should a have a submit button', function() {
       driver.findElement(webdriver.By.name('loadFile').click().then(function()) {
 
       }
