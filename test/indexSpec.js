@@ -18,6 +18,9 @@ test.describe('Index', function() {
 
    test.it('should open the browser', function() {
       driver.get('http://localhost:3000');
+      driver.getTitle().then(function(title) {
+         expect(title).to.contain('Load spreadsheet')
+      })
 //      driver.wait(function() {
 //      }, 3000);
    });
@@ -25,17 +28,51 @@ test.describe('Index', function() {
    test.it('should retrieve the heading', function() {
       driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
 //         console.log('Text is:', text);
-         expect(text).to.equal('HEA Analysis Spreadsheet loader');
+         expect(text).to.contain('HEA Analysis Spreadsheet loader');
       });
    });
 
+   test.it('should have a label saying \'Enter the path and file name of your spreadsheet here\'', function() {
+      driver.findElement(webdriver.By.id('lblInputBox')).getText().then(function(text) {
+         expect(text).to.contain('Enter the path and file name of your spreadsheet here');
+      });
+   });
+
+   test.it('should have a single-line text input box', function() {
+      driver.findElement(webdriver.By.id('txtPathToFile')).getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('/path/to/file/');
+      });
+   });
+
+   test.it('should have a \'Browse\' button', function() {
+      driver.findElement(webdriver.By.id('btnChooseFile')).getAttribute("accept").then(function(text) {
+         var arr = text.split(',');
+         arr = arr.sort();
+         expect(arr).to.deep.equal(['.xls','.xlsx']);
+      });
+   });
+
+   test.it('should a have a submit button', function() {
+      driver.findElement(webdriver.By.id('btnUploadFile')).getAttribute('value').then(function(text) {
+         expect(text).to.contain('Upload');
+      });
+   });
+
+// engage@siliconcape.com
+// thokomiya17@gmail.com
+
+
+//      });
+/*
    test.it('should have a single-line text input box', function() {
       driver.findElement(webdriver.By.name('pathToFile').sendKeys('/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_0.xlsx');
    })
 
    test.it('should a have a submit button', function() {
-      driver.findElement(webdriver.By.name('loadFile').)
-   })
+      driver.findElement(webdriver.By.name('loadFile').click().then(function()) {
+
+      }
+   })*/
 
    test.after(function() {
       driver.quit();
