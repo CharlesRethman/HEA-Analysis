@@ -94,6 +94,6 @@ test.describe('Index', function() {
    })*/
 
    test.after(function() {
-//      driver.quit();
+      driver.quit();
    });
 });
