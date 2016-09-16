@@ -5,13 +5,14 @@
 
 var expect = require('chai').expect,
    webdriver = require('selenium-webdriver'),
-   test = require('selenium-webdriver/testing'),
-   path = '/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_1.xlsx'
+   test = require('selenium-webdriver/testing');
 
 
 test.describe('Index', function() {
    this.timeout(15000);
-   var driver;
+   var driver,
+      txtBox,
+      path = '/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_1.xlsx'
 
    test.before(() => {
       driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
@@ -36,31 +37,32 @@ test.describe('Index', function() {
       });
    });
 
-   test.it('should have a single-line text input box, size 60, with \'path/to/file/\' shown in it', function() {
-      var element = driver.findElement(webdriver.By.id('txtPathToFile'));
-      element.getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('/path/to/file/');
+   test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/file.xlsx\' shown in it', function() {
+      txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
+      txtBox.getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('/enter/the/path/to/your/file.xlsx');
       });
-      element.getAttribute('size').then(function(value) {
+      txtBox.getAttribute('size').then(function(value) {
          expect(value).to.equal("60");
       });
-//      element.sendKeys(path);
+//      txtBox.sendKeys(path);
    });
 
    test.it('should have a \'Choose file\' button', function() {
-      element = driver.findElement(webdriver.By.id('btnChooseFile'));
-      element.getAttribute('accept').then(function(text) {
+      chooseFile = driver.findElement(webdriver.By.id('btnChooseFile'));
+      chooseFile.getAttribute('accept').then(function(text) {
          var arr = text.split(',');
          arr = arr.sort();
          expect(arr).to.deep.equal(['.xls','.xlsx']);
       });
-      element.sendKeys(path).then(function() {
-         element.getAttribute('value').then(function(text) {
+      chooseFile.sendKeys(path).then(function() {
+         chooseFile.getAttribute('value').then(function(text) {
             text = text.slice(text.lastIndexOf('\\') + 1);
             var file = path.slice(path.lastIndexOf('/') + 1);
             expect(text).to.equal(file);
          });
       });
+//      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
    test.it('should a have an \'Upload\' button', function() {
