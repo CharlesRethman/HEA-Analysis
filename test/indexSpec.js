@@ -1,6 +1,6 @@
 /*
  *
- * Test for the spreadhseet scraper
+ * Test for the server index.js
  */
 
 var expect = require('chai').expect,
@@ -26,7 +26,6 @@ test.describe('Index', function() {
 
    test.it('should retrieve the heading', function() {
       driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
-//         console.log('Text is:', text);
          expect(text).to.contain('HEA Analysis Spreadsheet loader');
       });
    });
@@ -58,8 +57,8 @@ test.describe('Index', function() {
       element.sendKeys(path).then(function() {
          element.getAttribute('value').then(function(text) {
             text = text.slice(text.lastIndexOf('\\') + 1);
-            path = path.slice(path.lastIndexOf('/') + 1);
-            expect(text).to.equal(path);
+            var file = path.slice(path.lastIndexOf('/') + 1);
+            expect(text).to.equal(file);
          });
       });
    });
