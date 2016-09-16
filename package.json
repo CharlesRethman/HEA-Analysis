@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "repository": "https://github.com/CharlesRethman/HEA-Analysis/tree/master/pop",
   "dependencies": {
-    "express": "~4.1.1",
+    "express": "^4.14",
     "express-session": "^1.11.3",
     "jade": "1.1.5",
     "mongoose": "^4.1.9",
@@ -22,7 +22,6 @@
   "version": "0.0.1",
   "devDependencies": {
     "chai": "^3.5.0",
-    "chromedriver": "^2.24.1",
     "selenium-webdriver": "^3.0.0-beta-2"
   }
 }

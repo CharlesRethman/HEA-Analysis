@@ -16,7 +16,7 @@ var express = require('express'),
 // Create our Express application
 var app = express();
 app.set('port', 3000);
-app.use(express.static('views'));
+//app.use(express.static('views'));
 
 
 // Use the body-parser package in our application
@@ -25,9 +25,17 @@ app.use(express.static('views'));
 //}));
 
 // respond to GET with a small piece of HTML
-app.get('/testRoute', (req, res) => {
-   res.send('<html><body><h1>It worked!</h1></body></html>')
+app.get('/', function(req, res) {
+   res.sendFile(__dirname + '/views/index.html', function(err) {
+      if (err) {
+         console.log(err);
+         res.status(err.status).end();
+      }
+   });
 });
+//app.get('/',function(req,res){
+//   res.sendFile(__dirname + "/index.html");
+//});
 
 // Create our Express router
 //var router = express.Router();

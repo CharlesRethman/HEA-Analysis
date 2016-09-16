@@ -65,9 +65,13 @@ test.describe('Index', function() {
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
-   test.it('should a have an \'Upload\' button', function() {
-      driver.findElement(webdriver.By.id('btnUploadFile')).getAttribute('value').then(function(text) {
-         expect(text).to.contain('Upload');
+   test.it('should have an \'Upload\' button named \'submit\'.', function() {
+      var uploadFile = driver.findElement(webdriver.By.id('btnUploadFile'))
+      uploadFile.getAttribute('value').then(function(text) {
+         expect(text).to.equal('Upload');
+      });
+      uploadFile.getAttribute('name').then(function(text) {
+         expect(text).to.equal('submit');
       });
    });
 
