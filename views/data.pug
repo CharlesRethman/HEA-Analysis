@@ -1,8 +1,12 @@
 doctype html
-head
-   title= Load spreadsheet
-body
-   h1= HEA Analysis Spreadsheet loader
-   p(id="lblInputBox")= Enter the path and file name of your spreadsheet here:
-   p= (input(type="text" id="txtPathFile" placeholder="/enter/the/path/to/your/file.xlsx" size="60") input(type="file" id="btnChooseFile" accept=".xlsx,.xls"))
-   p= input(type="button" id="btnUploadFile" value="Upload")
+   head
+      title= Load spreadsheet
+   body
+      h1= HEA Analysis Spreadsheet loader
+      form(id="pickSsheet")
+         p(id="lblFileBtn")= Browse for the folder or spreadsheet file you want:
+         p= (input(type="file" id="btnChooseFile" accept=".xlsx,.xls"))
+         p= Or
+         p(id="lblTxtBox")= Enter the path and file name of your spreadsheet:
+         p= (input(type="text" id="txtPathFile" placeholder="/enter/the/path/to/your/folder/or/file.xlsx" size="60"))
+         p= input(type="button" id="btnUploadFile" value="Upload")

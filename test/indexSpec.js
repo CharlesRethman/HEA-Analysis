@@ -31,21 +31,10 @@ test.describe('Index', function() {
       });
    });
 
-   test.it('should have a label saying \'Enter the path and file name of your spreadsheet here\'', function() {
-      driver.findElement(webdriver.By.id('lblInputBox')).getText().then(function(text) {
-         expect(text).to.contain('Enter the path and file name of your spreadsheet here');
+   test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
+      driver.findElement(webdriver.By.id('lblFileBtn')).getText().then(function(text) {
+         expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
-   });
-
-   test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/file.xlsx\' shown in it', function() {
-      txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
-      txtBox.getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('/enter/the/path/to/your/file.xlsx');
-      });
-      txtBox.getAttribute('size').then(function(value) {
-         expect(value).to.equal("60");
-      });
-//      txtBox.sendKeys(path);
    });
 
    test.it('should have a \'Choose file\' button', function() {
@@ -63,6 +52,23 @@ test.describe('Index', function() {
          });
       });
 //      expect(txtBox.getAttribute('value')).to.equal(text);
+   });
+
+   test.it('should have a label saying \'Enter the path and file name of your spreadsheet\'', function() {
+      driver.findElement(webdriver.By.id('lblTxtBox')).getText().then(function(text) {
+         expect(text).to.contain('Enter the path and file name of your spreadsheet');
+      });
+   });
+
+   test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/folder/or/file.xlsx\' shown in it', function() {
+      txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
+      txtBox.getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('/enter/the/path/to/your/folder/or/file.xlsx');
+      });
+      txtBox.getAttribute('size').then(function(value) {
+         expect(value).to.equal("60");
+      });
+//      txtBox.sendKeys(path);
    });
 
    test.it('should have an \'Upload\' button named \'submit\'.', function() {
