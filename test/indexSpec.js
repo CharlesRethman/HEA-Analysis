@@ -90,18 +90,7 @@ test.describe('Index', function() {
          });
 //      }, 3000);
 
-      driver.findElement(webdriver.By.id('txtPathToFile')).getAttribute('value').then(function(text) {
-         console.log(text);
-      });
-
-   });
-
-/*   test.it('should a have a submit button', function() {
-      driver.findElement(webdriver.By.name('loadFile').click().then(function()) {
-
-      }
-   })*/
-
+*/
    test.after(function() {
       driver.quit();
    });
