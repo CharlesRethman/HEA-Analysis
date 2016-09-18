@@ -18,18 +18,16 @@ test.describe('Index', function() {
       driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
    });
 
-   test.it('should open the browser', function() {
+   test.it('should open the browser and retrieve the heading', function() {
       driver.get('http://localhost:3000');
       driver.getTitle().then(function(title) {
          expect(title).to.contain('Load spreadsheet')
-      })
-   });
-
-   test.it('should retrieve the heading', function() {
+      });
       driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
          expect(text).to.contain('HEA Analysis Spreadsheet loader');
       });
    });
+
 
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('lblFileBtn')).getText().then(function(text) {
@@ -72,15 +70,15 @@ test.describe('Index', function() {
    });
 
    test.it('should have an \'Upload\' button named \'submit\'.', function() {
-      var uploadFile = driver.findElement(webdriver.By.id('btnUploadFile'))
+      var uploadFile = driver.findElement(webdriver.By.id('submitFile'))
       uploadFile.getAttribute('value').then(function(text) {
          expect(text).to.equal('Upload');
       });
-      uploadFile.getAttribute('name').then(function(text) {
-         expect(text).to.equal('submit');
+      driver.findElement(webdriver.By.className('pick-ssheet')).submit();
+      driver.getCurrentUrl().then(function(text) {
+         expect(text).to.contain('/api/loadsheets')
       });
    });
-
 
 /*   test.it('The path should be set by the choose button', function() {
       element = driver.findElement(webdriver.By.id('btnChooseFile'))
@@ -105,6 +103,6 @@ test.describe('Index', function() {
    })*/
 
    test.after(function() {
-      driver.quit();
+//      driver.quit();
    });
 });
