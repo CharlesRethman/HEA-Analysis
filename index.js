@@ -26,16 +26,13 @@ app.set('port', 3000);
 
 // respond to GET with a small piece of HTML
 app.get('/', function(req, res) {
-   res.sendFile(__dirname + '/views/index.html', function(err) {
+   res.sendFile(__dirname + '/views/index.html', (err) => {
       if (err) {
-         console.log(err);
+         console.error(err);
          res.status(err.status).end();
       }
    });
 });
-//app.get('/',function(req,res){
-//   res.sendFile(__dirname + "/index.html");
-//});
 
 // Create our Express router
 //var router = express.Router();
