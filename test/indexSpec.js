@@ -75,7 +75,7 @@ test.describe('Index', function() {
          expect(text).to.equal('Upload');
       });
       driver.findElement(webdriver.By.className('pick-ssheet')).submit();
-      driver.getCurrentUrl().then(function(text) {
+      driver.getPageSource().then(function(text) {
          expect(text).to.contain('/api/loadsheets')
       });
    });
@@ -103,6 +103,6 @@ test.describe('Index', function() {
    })*/
 
    test.after(function() {
-//      driver.quit();
+      driver.quit();
    });
 });
