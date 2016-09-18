@@ -75,22 +75,13 @@ test.describe('Index', function() {
          expect(text).to.equal('Upload');
       });
       driver.findElement(webdriver.By.className('pick-ssheet')).submit();
-      driver.getPageSource().then(function(text) {
-         expect(text).to.contain('/api/loadsheets')
-      });
+      driver.wait(function() {
+         return driver.getPageSource().then(function(text) {
+            return expect(text).to.contain('/api/loadsheets')
+         });
+      }, 3000);
    });
 
-/*   test.it('The path should be set by the choose button', function() {
-      element = driver.findElement(webdriver.By.id('btnChooseFile'))
-
-//      driver.wait(function() {
-         element.getAttribute('value').then(function(text) {
-            text = 'za2xx_1.xlsx'
-            console.log(text);
-         });
-//      }, 3000);
-
-*/
    test.after(function() {
       driver.quit();
    });
