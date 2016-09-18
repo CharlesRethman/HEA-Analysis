@@ -8,16 +8,19 @@ var expect = require('chai').expect,
    test = require('selenium-webdriver/testing');
 
 
-test.describe('Index', function() {
+test.describe('Tests out index.js and index.html files', function() {
+
    this.timeout(15000);
    var driver,
       txtBox,
       path = '/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_1.xlsx'
 
+   // Set up webdriver (using Chrome) and start the browser
    test.before(() => {
       driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
    });
 
+   // Test 1
    test.it('should open the browser and retrieve the heading', function() {
       driver.get('http://localhost:3000');
       driver.getTitle().then(function(title) {
@@ -28,13 +31,14 @@ test.describe('Index', function() {
       });
    });
 
-
+   // Test 2
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('lblFileBtn')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
    });
 
+   // Test 3
    test.it('should have a \'Choose file\' button', function() {
       chooseFile = driver.findElement(webdriver.By.id('btnChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
@@ -52,12 +56,14 @@ test.describe('Index', function() {
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
+   // Test 4
    test.it('should have a label saying \'Enter the path and file name of your spreadsheet\'', function() {
       driver.findElement(webdriver.By.id('lblTxtBox')).getText().then(function(text) {
          expect(text).to.contain('Enter the path and file name of your spreadsheet');
       });
    });
 
+   // Test 5
    test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/folder/or/file.xlsx\' shown in it', function() {
       txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
       txtBox.getAttribute('placeholder').then(function(text) {
@@ -69,6 +75,7 @@ test.describe('Index', function() {
 //      txtBox.sendKeys(path);
    });
 
+   // Test 6
    test.it('should have an \'Upload\' button named \'submit\'.', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submitFile'))
       uploadFile.getAttribute('value').then(function(text) {
@@ -82,6 +89,7 @@ test.describe('Index', function() {
       }, 3000);
    });
 
+   // Shut down the browser
    test.after(function() {
       driver.quit();
    });
