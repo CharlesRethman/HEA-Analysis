@@ -84,7 +84,7 @@ test.describe('Tests out index.js and index.html files', function() {
       driver.findElement(webdriver.By.className('pick-ssheet')).submit();
       driver.wait(function() {
          return driver.getPageSource().then(function(text) {
-            return expect(text).to.contain('/api/loadsheets')
+            return expect(text).to.contain('File uploaded successfully, processing spreadsheet');
          });
       }, 3000);
    });

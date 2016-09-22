@@ -18,11 +18,13 @@ var app = express();
 app.set('port', 3000);
 //app.use(express.static('views'));
 
+// Create Express router
+var router = express.Router();
 
-// Use the body-parser package in our application
-//app.use(bodyParser.urlencoded({
-// 	extended: true
-//}));
+/*// Use the body-parser package in our application
+app.use(bodyParser.urlencoded({
+ 	extended: true
+}));*/
 
 // respond to GET with a small piece of HTML
 app.get('/', function(req, res) {
@@ -34,8 +36,18 @@ app.get('/', function(req, res) {
    });
 });
 
-// Create our Express router
-//var router = express.Router();
+
+app.route('/api/loadsheets')
+   .post(function(req, res) {
+      var ctype = req.get("content-type");
+      console.log(ctype);
+/*      if (err) {
+         console.error(err);
+         res.status(err.status).end();
+      }*/
+//      res.send(res.status);
+      res.send('<p>File uploaded successfully, processing spreadsheet</p>');
+   });
 
 // Start the server
 http.createServer(app).listen(app.get('port'), () => {
