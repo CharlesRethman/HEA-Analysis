@@ -81,10 +81,10 @@ test.describe('Tests out index.js and index.html files', function() {
       uploadFile.getAttribute('value').then(function(text) {
          expect(text).to.equal('Upload');
       });
-      driver.findElement(webdriver.By.className('pick-ssheet')).submit();
+      uploadFile.click();
       driver.wait(function() {
          return driver.getPageSource().then(function(text) {
-            return expect(text).to.contain('/api/loadsheets')
+            return expect(text).to.contain('File uploaded successfully, processing spreadsheet');
          });
       }, 3000);
    });

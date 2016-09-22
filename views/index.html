@@ -3,21 +3,22 @@
 <html>
 <head>
 <title>Load spreadsheet</title>
+<meta></meta>
 </head>
 <body>
 
    <h1>HEA Analysis Spreadsheet loader</h1>
 
-   <form class="pick-ssheet" action="/api/loadsheets" method="post">
+   <form class="pick-ssheet" action="/api/loadsheets" method="post" enctype="multipart/form-data">
 
-      <p id="lblFileBtn">Browse for the folder or spreadsheet file you want:</p>
-      <p><input type="file" id="btnChooseFile" accept=".xlsx,.xls" webkitdirectory multiple/></p>
+      <label id="lblFileBtn">Browse for the folder or spreadsheet file you want:</label>
+      <input type="file" id="btnChooseFile" accept=".xlsx,.xls" webkitdirectory multiple/>
 
       <p>Or</p>
-      <p id="lblTxtBox">Enter the path and file name of your spreadsheet:</p>
+      <label id="lblTxtBox">Enter the path and file name of your spreadsheet:</label>
       <p><input type="text" id="txtPathFile" placeholder="/enter/the/path/to/your/folder/or/file.xlsx" size="60" />
 
-      <p><input type="submit" id="submitFile" value="Upload"></input></p>
+      <p><input type="submit" id="submitFile" value="Upload"/></p>
 
    </form>
 
