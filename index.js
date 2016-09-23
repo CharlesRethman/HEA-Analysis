@@ -9,22 +9,23 @@
 
 var express = require('express'),
    http = require('http'),
-//   bodyParser = require('body-parser'),
-   passport = require('passport');
+   bodyParser = require('body-parser'),
+   passport = require('passport'),
+   multer = require('multer');
 
 
 // Create our Express application
 var app = express();
+var upload = multer();
 app.set('port', 3000);
 //app.use(express.static('views'));
 
 // Create Express router
 var router = express.Router();
 
-/*// Use the body-parser package in our application
-app.use(bodyParser.urlencoded({
- 	extended: true
-}));*/
+// Use the body-parser package in our application
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
 
 // respond to GET with a small piece of HTML
 app.get('/', function(req, res) {
@@ -38,9 +39,11 @@ app.get('/', function(req, res) {
 
 
 app.route('/api/loadsheets')
-   .post(function(req, res) {
+   .post(upload.array(), function(req, res) {
       var ctype = req.get("content-type");
+      console.log(req.body);
       console.log(ctype);
+      console.log(upload);
 /*      if (err) {
          console.error(err);
          res.status(err.status).end();

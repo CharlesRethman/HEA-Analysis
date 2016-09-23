@@ -8,7 +8,7 @@ var expect = require('chai').expect,
    test = require('selenium-webdriver/testing');
 
 
-test.describe('Tests out index.js and index.html files', function() {
+test.describe('Tests index.js and index.html files', function() {
 
    this.timeout(15000);
    var driver,
