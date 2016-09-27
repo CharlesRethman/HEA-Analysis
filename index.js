@@ -35,7 +35,6 @@ app.use(busboy());
 app.use(bodyParser.urlencoded({
  	extended: true
 }));*/
->>>>>>> 437affc2c14c5a92fb9c4b7ac87866138abfcc5b
 
 // respond to GET with a small piece of HTML
 app.get('/', (req, res) => {
