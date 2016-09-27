@@ -9,16 +9,20 @@
 
    <h1>HEA Analysis Spreadsheet loader</h1>
 
-   <form class="pick-ssheet" action="/api/loadsheets" method="post" enctype="multipart/form-data">
+   <form action="/api/loadsheets" method="post" enctype="multipart/form-data" target="_top">
 
-      <label id="lblFileBtn">Browse for the folder or spreadsheet file you want:</label>
-      <input type="file" id="btnChooseFile" accept=".xlsx,.xls" multiple/>
+      <fieldset>
 
-      <p>Or</p>
-      <label id="lblTxtBox">Enter the path and file name of your spreadsheet:</label>
-      <p><input type="text" id="txtPathFile" placeholder="/enter/the/path/to/your/folder/or/file.xlsx" size="60" />
+      <label for="btnChooseFile">Browse for the folder or spreadsheet file you want:</label>
+      <input type="file" id="btnChooseFile" multiple accept=".xls,.xlsx,.XLS,.XLSX">
 
-      <p><input type="submit" id="submitFile" value="Upload"/></p>
+<!--      <p>Or</p>
+      <label for="txtPathFile" id="lblTxtBox">Enter the path and file name of your spreadsheet:</label>
+      <p><input type="text" id="txtPathFile" name="enterPath" placeholder="/enter/the/path/to/your/folder/or/file.xlsx" size="60"></p> -->
+
+      <p><input type="submit" id="submitFile" value="Upload"></p>
+
+      </fieldset>
 
    </form>
 
