@@ -22,19 +22,14 @@ var upload = multer();
 app.set('port', 3000);
 //app.use(express.static('views'));
 
-// Create Express router
+/*// Create Express router
 var router = express.Router();
 
-/*// Use the body-parser package in our application
-<<<<<<< HEAD
+// Use the body-parser package in our application
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));*/
 
 app.use(busboy());
-/*=======
-app.use(bodyParser.urlencoded({
- 	extended: true
-}));*/
 
 // respond to GET with a small piece of HTML
 app.get('/', (req, res) => {
@@ -47,32 +42,27 @@ app.get('/', (req, res) => {
 });
 
 
-<<<<<<< HEAD
-app.post('/api/loadsheets', upload.array(), (req, res) => {
-//   var ctype = req.get("content-type");
+app.post('/api/loadsheets', function(req, res) {
+   var fStream;
+   req.pipe(req.busboy);
+   req.busboy.on('chooseFile', function(fieldname, file, filename) {
+      console.log('Uploading ' + filename);
+      fStream = fs.createWriteStream(__dirname + '/data/spreadsheets/' + filename);
+      file.pipe(fStream);
+      fStream.on('close', function() {
+         console.log('Upload finished!');
+         res.send('File uploaded successfully, processing spreadsheet');
+         res.redirect('back');
+      });
+   });
+/*//   var ctype = req.get("content-type");
 //   console.log(req.query['enterPath']);
    console.log(req.body);
    console.log(req.files);
 //   console.log(ctype);
-   console.log(upload);
-=======
-app.route('/api/loadsheets')
-   .post(function(req, res) {
-      var ctype = req.get("content-type");
-      console.log(ctype);
->>>>>>> 437affc2c14c5a92fb9c4b7ac87866138abfcc5b
-/*      if (err) {
-         console.error(err);
-         res.status(err.status).end();
-      }*/
-//      res.send(res.status);
-<<<<<<< HEAD
-   res.send('<p>File uploaded successfully, processing spreadsheet</p>');
+   console.log(upload);*/
 });
-=======
-      res.send('<p>File uploaded successfully, processing spreadsheet</p>');
-   });
->>>>>>> 437affc2c14c5a92fb9c4b7ac87866138abfcc5b
+
 
 // Start the server
 http.createServer(app).listen(app.get('port'), () => {

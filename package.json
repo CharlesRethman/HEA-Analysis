@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "repository": "https://github.com/CharlesRethman/HEA-Analysis/tree/master/pop",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "connect-busboy": "0.0.2",
     "express": "^4.14",
     "express-session": "^1.11.3",
     "jade": "1.1.5",
