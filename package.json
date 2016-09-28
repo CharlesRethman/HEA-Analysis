@@ -1,29 +1,18 @@
 {
-  "name": "hea-analysis",
-  "description": "A package to read input data from Single Zone Spreadsheets and load it into a DB",
-  "author": "Charles Rethman <rethman@me.com>",
-  "readme": "README.md",
-  "license": "GPL-3.0",
-  "repository": "https://github.com/CharlesRethman/HEA-Analysis/tree/master/pop",
-  "dependencies": {
-    "connect-busboy": "0.0.2",
-    "express": "^4.14",
-    "express-session": "^1.11.3",
-    "jade": "1.1.5",
-    "mongoose": "^4.1.9",
-    "multer": "^1.2.0",
-    "oauth2orize": "^1.0.1",
-    "passport": "^0.3.0",
-    "passport-http": "^0.3.0",
-    "passport-http-bearer": "^1.0.1",
-    "pg": "4.5.x",
-    "xlsx": "^0.8.0"
+  "name": "hea_analysis",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
   },
-  "engine": "node 6.5.x",
-  "main": "index.js",
-  "version": "0.0.1",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "selenium-webdriver": "^3.0.0-beta-2"
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "multer": "^1.2.0",
+    "serve-favicon": "~2.3.0"
   }
 }

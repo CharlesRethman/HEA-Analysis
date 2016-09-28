@@ -10,7 +10,7 @@
 var express = require('express'),
    http = require('http'),
    fs = require('fs'),
-//   bodyParser = require('body-parser'),
+   bodyParser = require('body-parser'),
    passport = require('passport'),
    multer = require('multer'),
    busboy = require('connect-busboy');
@@ -22,14 +22,16 @@ var upload = multer();
 app.set('port', 3000);
 //app.use(express.static('views'));
 
-/*// Create Express router
+/*
+// Create Express router
 var router = express.Router();
+*/
 
 // Use the body-parser package in our application
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended : true }));*/
+app.use(bodyParser.urlencoded({ extended : true }));
 
-app.use(busboy());
+//app.use(busboy());
 
 // respond to GET with a small piece of HTML
 app.get('/', (req, res) => {
@@ -41,27 +43,33 @@ app.get('/', (req, res) => {
    });
 });
 
-
+/*
 app.post('/api/loadsheets', function(req, res) {
-   var fStream;
+   var fstream;
    req.pipe(req.busboy);
-   req.busboy.on('chooseFile', function(fieldname, file, filename) {
+   req.busboy.on('file', function(fieldname, file, filename) {
       console.log('Uploading ' + filename);
-      fStream = fs.createWriteStream(__dirname + '/data/spreadsheets/' + filename);
-      file.pipe(fStream);
-      fStream.on('close', function() {
-         console.log('Upload finished!');
+      fstream = fs.createWriteStream(__dirname + '/data/spreadsheets/' + filename);
+      file.pipe(fstream);
+      fstream.on('close', function() {
          res.send('File uploaded successfully, processing spreadsheet');
-         res.redirect('back');
       });
    });
-/*//   var ctype = req.get("content-type");
+});
+*/
+
+app.post('/api/loadsheets', upload.array(), function (req, res, next) {
+  console.log(req.body);
+  res.json(req.body);
+});
+/*
 //   console.log(req.query['enterPath']);
    console.log(req.body);
    console.log(req.files);
 //   console.log(ctype);
-   console.log(upload);*/
-});
+   console.log(upload);
+   */
+
 
 
 // Start the server
