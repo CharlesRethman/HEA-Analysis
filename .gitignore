@@ -15,5 +15,5 @@ node_modules/*
 .DS_Store
 .DS_STORE
 
-# These .gitignore files!
+# Not ignored, remove the # below to ignore as well. These .gitignore files!
 # .gitignore
