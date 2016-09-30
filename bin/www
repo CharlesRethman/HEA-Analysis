@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('hea_analysis:server');
+var debug = require('debug')('hea-analysis:server');
 var http = require('http');
 
 /**

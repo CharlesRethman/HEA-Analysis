@@ -15,5 +15,8 @@ node_modules/*
 .DS_Store
 .DS_STORE
 
-# These .gitignore files!
+# Debug logs
+npm-debug.log.*
+
+# Not ignored, remove the # below to ignore as well. These .gitignore files!
 # .gitignore
