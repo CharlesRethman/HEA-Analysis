@@ -1,7 +1,7 @@
 extends layout.jade
 
 block content
-   h1= title
+   h1= subtitle
    form#fileUpload(method='post' action='/uploads/upload' enctype='multipart/form-data')
       label(for='payload') Select a file to upload:
       input#payload(type='file' name='myFiles' accept='.xlsx,.xls' multiple)

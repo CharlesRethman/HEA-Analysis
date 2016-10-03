@@ -8,7 +8,7 @@ var expect = require('chai').expect,
    test = require('selenium-webdriver/testing');
 
 
-test.describe('Tests made on index.js and index.html files', function() {
+test.describe('Tests made on www, app.js and uploadFiles.jade files', function() {
 
    this.timeout(15000);
    var driver,
@@ -21,13 +21,13 @@ test.describe('Tests made on index.js and index.html files', function() {
    });
 
    // Test 1
-   test.it('should open the browser and retrieve the heading', function() {
+   test.it('should open the browser and retrieve the title and heading', function() {
       driver.get('http://localhost:3000');
       driver.getTitle().then(function(title) {
-         expect(title).to.contain('Load spreadsheet')
+         expect(title).to.contain('Load Spreadsheet')
       });
       driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
-         expect(text).to.contain('HEA Analysis Spreadsheet loader');
+         expect(text).to.contain('HEA Analysis Spreadsheet Loader');
       });
    });
 
