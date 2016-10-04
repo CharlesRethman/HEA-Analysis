@@ -4,12 +4,8 @@
 # NPM files
 node_modules/*
 
-# QGIS and CSV backup files
-*.qgs~
-*.csv~
-
-# Libre Office back up files
-.~lock*
+# Uploaded files
+uploads/*
 
 # OSX files
 .DS_Store
