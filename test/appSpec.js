@@ -56,7 +56,7 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
       });
    });
 
-   // Test 3
+   // Test 5
    test.it('should have a \'Choose file\' button', function() {
       chooseFile = driver.findElement(webdriver.By.id('buttonChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
@@ -74,7 +74,7 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
-   // Test 5
+   // Test 6
    test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/folder/or/file.xlsx\' shown in it', function() {
       txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
       txtBox.getAttribute('placeholder').then(function(text) {
@@ -86,7 +86,7 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
 //      txtBox.sendKeys(path);
    });
 
-   // Test 6
+   // Test 7
    test.it('should have a button with the value \'Upload\'', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submit'))
       uploadFile.getAttribute('value').then(function(text) {
