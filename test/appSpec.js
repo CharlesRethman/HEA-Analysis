@@ -42,7 +42,14 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
       });
    });
 
-   // Test 2
+   // Test 3
+   test.it('should have a drop-down saying \'Choose country for your analysis\'', function() {
+      driver.findElement(webdriver.By.id('chooseCountry')).getText().then(function(text) {
+         expect(text).to.contain('');
+      });
+   });
+
+   // Test 4
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('labelChooseFile')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
@@ -67,13 +74,6 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
-   // Test 4
-   test.it('should have a label saying \'Enter the path and file name of your spreadsheet\'', function() {
-      driver.findElement(webdriver.By.id('lblTxtBox')).getText().then(function(text) {
-         expect(text).to.contain('Enter the path and file name of your spreadsheet');
-      });
-   });
-
    // Test 5
    test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/folder/or/file.xlsx\' shown in it', function() {
       txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
@@ -87,9 +87,9 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    });
 
    // Test 6
-   test.it('should have an \'Upload\' button named \'submit\'.', function() {
-      var uploadFile = driver.findElement(webdriver.By.id('submitFile'))
-      uploadFile.getAttribute('value').then(function(text) {
+   test.it('should have a button with the value \'Upload\'.', function() {
+      var uploadFile = driver.findElement(webdriver.By.id('submit'))
+      uploadFile.getText().then(function(text) {
          expect(text).to.equal('Upload');
       });
       uploadFile.click();
@@ -102,6 +102,6 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
 
    // Shut down the browser
    test.after(function() {
-//      driver.quit();
+      driver.quit();
    });
 });

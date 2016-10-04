@@ -27,7 +27,7 @@ router.post('/upload', function(req, res, next) {
          }
          fs.exists(elem.path, function(exists) {
             if (exists) {
-               res.end("Got your file!");
+               res.end("File uploaded successfully, processing spreadsheet.");
             } else {
                res.end("No file uploaded.");
             }
