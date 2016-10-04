@@ -32,15 +32,26 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    });
 
    // Test 2
+   test.it('should navigate to the upload files URL and load elements', function() {
+      driver.get('http://localhost:3000/uploads');
+      driver.getTitle().then(function(title) {
+         expect(title).to.contain('Load Spreadsheet')
+      });
+      driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
+         expect(text).to.contain('HEA Analysis Spreadsheet Loader');
+      });
+   });
+
+   // Test 2
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
-      driver.findElement(webdriver.By.id('lblFileBtn')).getText().then(function(text) {
+      driver.findElement(webdriver.By.id('labelChooseFile')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
    });
 
    // Test 3
    test.it('should have a \'Choose file\' button', function() {
-      chooseFile = driver.findElement(webdriver.By.id('btnChooseFile'));
+      chooseFile = driver.findElement(webdriver.By.id('buttonChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
          var arr = text.split(',');
          arr = arr.sort();
@@ -91,6 +102,6 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
 
    // Shut down the browser
    test.after(function() {
-      driver.quit();
+//      driver.quit();
    });
 });

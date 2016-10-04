@@ -3,7 +3,7 @@ extends layout.jade
 block content
    h1= subtitle
    form#fileUpload(method='post' action='/uploads/upload' enctype='multipart/form-data')
-      label(for='payload') Select a file to upload:
-      input#payload(type='file' name='myFiles' accept='.xlsx,.xls' multiple)
+      label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file: 
+      input#buttonChooseFile(type='file' name='myFiles' accept='.xlsx,.xls' multiple)
       br
       button#upload Upload

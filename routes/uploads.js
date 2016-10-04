@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/upload', function(req, res, next) {
-   console.log('2:\n' + util.inspect(req.files));
+//   console.log('2:\n' + util.inspect(req.files));
 //   console.log(req.files.myFiles);
 //   console.log(util.inspect(req.files.myFiles));
 //   console.log(req.body);
@@ -17,11 +17,11 @@ router.post('/upload', function(req, res, next) {
    if (req.files.length === 0) {
       return next(new Error("Hey, first would you select a file?"));
    } else {
-      console.log('3:\n' + util.inspect(req.files));
+      console.log('2:\n' + util.inspect(req.files));
       req.files.forEach(function(elem) {
-         console.log('4 (path):\n' + elem.path);
-         console.log('5 (size):\n' + elem.size);
-         console.log('6 (original name):\n' + elem.originalname);
+         console.log('3 (path):\n' + elem.path);
+         console.log('4 (size):\n' + elem.size);
+         console.log('5 (original name):\n' + elem.originalname);
          if (elem.size === 0) {
             return next(new Error('This file is empty, perhaps the update failed.'));
          }
