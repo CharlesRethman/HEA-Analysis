@@ -3,7 +3,13 @@ extends layout.jade
 block content
    h1= subtitle
    form#fileUpload(method='post' action='/uploads/upload' enctype='multipart/form-data')
+      datalist#countries
+         option(value="Botswana")
+         option(value="Namibia")
+         option(value="South Africa")
+      input#chooseCountry(list='countries' placeholder='Country for your analysis...' size="30")
+      br
       label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file: 
       input#buttonChooseFile(type='file' name='myFiles' accept='.xlsx,.xls' multiple)
       br
-      button#submit Upload
+      input#submit(type= 'submit' value= 'Upload')

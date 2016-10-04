@@ -43,9 +43,9 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    });
 
    // Test 3
-   test.it('should have a drop-down saying \'Choose country for your analysis\'', function() {
-      driver.findElement(webdriver.By.id('chooseCountry')).getText().then(function(text) {
-         expect(text).to.contain('');
+   test.it('should have a drop-down saying \'Country for your analysis...\'', function() {
+      driver.findElement(webdriver.By.id('chooseCountry')).getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Country for your analysis');
       });
    });
 
@@ -87,9 +87,9 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    });
 
    // Test 6
-   test.it('should have a button with the value \'Upload\'.', function() {
+   test.it('should have a button with the value \'Upload\'', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submit'))
-      uploadFile.getText().then(function(text) {
+      uploadFile.getAttribute('value').then(function(text) {
          expect(text).to.equal('Upload');
       });
       uploadFile.click();
