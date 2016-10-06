@@ -7,7 +7,7 @@ node_modules/*
 # Uploaded files
 uploads/*
 
-# OSX files
+# OSX folder system files
 .DS_Store
 .DS_STORE
 

@@ -40,12 +40,15 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
       driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
          expect(text).to.contain('HEA Analysis Spreadsheet Loader');
       });
+      driver.findElement(webdriver.By.id('fileUpload')).getAttribute('action').then(function(text) {
+         expect(text).to.equal('http://localhost:3000/uploads/upload')
+      });
    });
 
    // Test 3
-   test.it('should have a drop-down saying \'Country for your analysis...\'', function() {
-      driver.findElement(webdriver.By.id('chooseCountry')).getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('Country for your analysis');
+   test.it('should have a drop-down saying \'Select your country...\'', function() {
+      driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
+         expect(text).to.contain('Select your country...');
       });
    });
 
