@@ -53,13 +53,25 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    });
 
    // Test 4
+   test.it('should have a single-line search input box, size 60, with \'Type the name or code of your livelihood zone here\' shown in it', function() {
+      searchLz = driver.findElement(webdriver.By.id('searchLz'));
+      searchLz.getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Type the name or code of your livelihood zone here');
+      });
+      searchLz.getAttribute('size').then(function(value) {
+         expect(value).to.equal("60");
+      });
+//      txtBox.sendKeys(path);
+   });
+
+   // Test 5
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('labelChooseFile')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
    });
 
-   // Test 5
+   // Test 6
    test.it('should have a \'Choose file\' button', function() {
       chooseFile = driver.findElement(webdriver.By.id('buttonChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
@@ -75,18 +87,6 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
          });
       });
 //      expect(txtBox.getAttribute('value')).to.equal(text);
-   });
-
-   // Test 6
-   test.it('should have a single-line text input box, size 60, with \'/enter/the/path/to/your/folder/or/file.xlsx\' shown in it', function() {
-      txtBox = driver.findElement(webdriver.By.id('txtPathFile'));
-      txtBox.getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('/enter/the/path/to/your/folder/or/file.xlsx');
-      });
-      txtBox.getAttribute('size').then(function(value) {
-         expect(value).to.equal("60");
-      });
-//      txtBox.sendKeys(path);
    });
 
    // Test 7
