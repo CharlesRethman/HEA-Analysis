@@ -13,7 +13,7 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    this.timeout(15000);
    var driver,
       txtBox,
-      path = '/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/za2xx_1.xlsx'
+      path = '/Users/Charles/Documents/hea_analysis/south_africa/2016.04/spreadsheets/zakhc_1.xlsx'
 
    // Set up webdriver (using Chrome) and start the browser
    test.before(() => {
@@ -46,32 +46,53 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
    });
 
    // Test 3
+   test.it('should hide the livelihood zone identifiers text boxes and the file upload controls, which should be in divisions that get switched on sequentially', function() {
+      driver.findElements(webdriver.By.css('div')).then(function(arr) {
+         var count = 0;
+         arr.forEach(function(elem) {
+            elem.getAttribute('hidden').then(function(value) {
+               console.log(count + ': ' + value);
+               expect(value).to.equal('true');
+            });
+         });
+      });
+   })
+
+   // Test 4
    test.it('should have a drop-down saying \'Select your country...\'', function() {
       driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
          expect(text).to.contain('Select your country...');
       });
    });
 
-   // Test 4
-   test.it('should have a single-line search input box, size 60, with \'Type the name or code of your livelihood zone here\' shown in it', function() {
+   // Test 5
+   test.it('should have a single-line search input box, size 60, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
       searchLz = driver.findElement(webdriver.By.id('searchLz'));
       searchLz.getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('Type the name or code of your livelihood zone here');
+         expect(text).to.contain('Type the name, abbreviation or code of your livelihood zone here');
       });
       searchLz.getAttribute('size').then(function(value) {
          expect(value).to.equal("60");
       });
-//      txtBox.sendKeys(path);
    });
 
-   // Test 5
+   // Test 6
+   test.it('should unhide on the lzDetails division, making the lzName, lzCode and lzAbbrev text boxes visible', function() {
+      driver.findElement(webdriver.By.id('searchLz')).sendKeys('Okhahlamba open access intense crops and livestock').then(function() {
+         driver.findElement(webdriver.By.id('lzDetails')).getAttribute('hidden').then(function(value) {
+            expect(value).to.equal('false');
+         })
+      })
+   });
+
+   // Test 7
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('labelChooseFile')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
    });
 
-   // Test 6
+   // Test 8
    test.it('should have a \'Choose file\' button', function() {
       chooseFile = driver.findElement(webdriver.By.id('buttonChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
@@ -89,7 +110,7 @@ test.describe('Tests made on www, app.js and uploadFiles.jade files', function()
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
-   // Test 7
+   // Test 9
    test.it('should have a button with the value \'Upload\'', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submit'))
       uploadFile.getAttribute('value').then(function(text) {

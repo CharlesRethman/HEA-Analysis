@@ -12,7 +12,15 @@ block content
       label#labelSearchLz(for='searchLz') Which livelihood zone does this spreadsheet apply to? 
       input#searchLz(type='search' size='60' placeholder='Type the name, abbreviation or code of your livelihood zone here')
       br
-      label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file: 
-      input#buttonChooseFile(type='file' name='myFiles' accept='.xlsx,.xls' multiple)
-      br
-      input#submit(type= 'submit' value= 'Upload')
+      div#lzDetails(for='fileUpload' hidden=true)
+         input#lzName(type='text' size=120)
+         br
+         input#lzCode(type='text' size=6)
+         input#lzAbbrev(type='text' size=6)
+         br
+      div#fileOps(for='fileUpload' hidden=true)
+         label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file: 
+         input#buttonChooseFile(type='file' name='myFiles' accept='.xlsx,.xls' multiple)
+         br
+         input#submit(type= 'submit' value= 'Upload')
+         br
