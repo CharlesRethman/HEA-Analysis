@@ -1,11 +1,27 @@
 # HEA-Analysis
 
-## Scraping the Spreadsheets
+## Building a database of scraped Spreadsheets
 
 An attempt to move the FEG Single-Zone Analysis Spreadsheets into a database for ongoing, multi-country analysis.
-First up is to scrape the existing spreadsheets. The config_szacs file serves as a _template_ for scraping the data off the spreadsheets and into a database (MongoDB? PostgreSQL? _jury still out_).
 
-Spreadsheet structure:
+### Simplified description of the process:
+   1. Serve up a web page that loads the spreadsheet. Page functionality:
+      - User login
+      - Zone indentification and upload. User enters country and searches for their desired livelihood zone (via name, code or abbreviation), uses `Search` button route, reply page reveals found zones in `text` inputs for editing or for adding in new zone section. User confirms zone details, uses `confirm` button route, reply page reveals upload file/s section. User choose spreadsheet file, uses `upload` button route, `scraper` invoked, reply page reveals tabular layout with data from spreadsheet. User edits and confirms data, uses `save` route, reply queries object in database.
+      - Problem spec reviews. Presentation of problem specs with indication of which zones or parts of zones (including _all_)they apply to. Can be edited for tweaking and adjustment.
+      - Defining the drought area. Maps from FAO. Shapes from ARC/ISCW. GDAL processing.
+   2. Spreadsheet scraping. The config_szacs file serves as a _template_ for scraping the data off the spreadsheets and into a database (MongoDB? PostgreSQL? _jury still out_).
+   3. Hazard imagery and processing.
+      - Imagery sources, e.g. FAO/GIEWS, ARC/ISCW, EU/MARS, control points for georeferecing.
+      - GDAL georeferencer
+      - GDAL raster-to-polygon processor
+      - Vector analysis: overlay hazard and LZs. Overlay hazard and population units (Enumeration Small Areas or Enumeration Areas). Calculate populations affected/not affected.
+   4. Risk assessment calculations by combining livelihoods analysis with map units in (3) above.
+   5. API for transferring back to spreadsheets (for those who _really_ want to).
+
+### Web page
+
+### Spreadsheet structure:
    - Livelihood Zone **Name** (`lz_name`), **Code** (`lz_code`), **Abbreviation** (`lz_abbrev`).
    - Wealth groups and sheets (`wg_name`, `wg_code`(?)) and `wg_sh_name` -> **V.Poor**, **Poor**, **Middle** and **Rich**.
    - Livelihood strategies divide into **Food Sources**, **Income Sources**, **Expenditure Items**. There are many of each of these to one Baseline.
@@ -21,8 +37,8 @@ Data structure and object templates in config JSON files:
 
 
 
-## The Analysis Algorithm
+### The Analysis Algorithm
 
-## Storing Calculations
+### Storing Calculations
 
-## Presenting it to Users as an API
+### Presenting it to Users as an API
