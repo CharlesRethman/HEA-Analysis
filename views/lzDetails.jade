@@ -1,4 +1,4 @@
-extends searchLz.jade
+extends lzSearch.jade
 
 block content
    h1= subtitle
@@ -15,9 +15,14 @@ block content
       input#search(type= 'submit' value= 'Search' hidden= 'true')
    section#lzDetails(for='fileUpload' hidden=true)
    form#confirmLz(calss= 'fill' method='post' action='/uploads/confirm' enctype='multipart/form-data')
-      input#lzName(type='text' size=120)
+      label#lzName_label(for='lzName') Enter your zone's full name:
+      input#lzName(type='text' size=90)
       br
+      label#lzCode_label(for='lzCode') Enter the 5-digit or 6-digit numerical code for your zone:
       input#lzCode(type='text' size=6)
-      input#lzAbbrev(type='text' size=6)
+      br
+      label#lzAbbrev_label(for='lzAbbrev') Enter the 5-digit alphanumeric abbreibation for your zone
+      §input#lzAbbrev(type='text' size=6)
       br
       input#confirm(type= 'submit' value= 'Confirm' hidden= 'false')
+      br
