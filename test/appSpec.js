@@ -52,7 +52,20 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 2
+   // Test 4
+   test.it('should hide the livelihood zone identifiers text boxes and the file upload controls, which should be in divisions that get switched on sequentially', function() {
+      driver.findElements(webdriver.By.css('div')).then(function(arr) {
+         var count = 0;
+         arr.forEach(function(elem) {
+            elem.getAttribute('hidden').then(function(value) {
+               console.log(count + ': ' + value);
+               expect(value).to.equal('true');
+            });
+         });
+      });
+   })
+
+   // Test 5
    test.it('should navigate to the upload files URL and load elements', function() {
       driver.get('http://localhost:3000/uploads');
       driver.getTitle().then(function(title) {
@@ -65,19 +78,6 @@ test.describe('Tests made on www, app.js and its associated files', function() {
          expect(text).to.equal('http://localhost:3000/uploads/upload')
       });
    });
-
-   // Test 3
-   test.it('should hide the livelihood zone identifiers text boxes and the file upload controls, which should be in divisions that get switched on sequentially', function() {
-      driver.findElements(webdriver.By.css('div')).then(function(arr) {
-         var count = 0;
-         arr.forEach(function(elem) {
-            elem.getAttribute('hidden').then(function(value) {
-               console.log(count + ': ' + value);
-               expect(value).to.equal('true');
-            });
-         });
-      });
-   })
 
    // Test 6
    test.it('should unhide on the lzDetails division, making the lzName, lzCode and lzAbbrev text boxes visible', function() {
