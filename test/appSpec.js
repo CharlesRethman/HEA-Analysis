@@ -21,13 +21,34 @@ test.describe('Tests made on www, app.js and its associated files', function() {
    });
 
    // Test 1
-   test.it('should open the browser and retrieve the title and heading', function() {
+   test.it('should open the browser, retrieve the title, heading and first form', function() {
       driver.get('http://localhost:3000');
       driver.getTitle().then(function(title) {
          expect(title).to.contain('Load Spreadsheet')
       });
-      driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
+      driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
          expect(text).to.contain('HEA Analysis Spreadsheet Loader');
+      });
+      driver.findElement(webdriver.By.id('identifyLz')).getAttribute('action').then(function(text) {
+         expect(text).to.contain('http://localhost:3000/search_lzs/search_lz');
+      });
+   });
+
+   // Test 2
+   test.it('should have a drop-down saying \'Select your country...\'', function() {
+      driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
+         expect(text).to.contain('Select your country...');
+      });
+   });
+
+   // Test 3
+   test.it('should have a single-line search input box, size 60, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
+      searchLz = driver.findElement(webdriver.By.id('searchLz'));
+      searchLz.getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Type the name, abbreviation or code of your livelihood zone here');
+      });
+      searchLz.getAttribute('size').then(function(value) {
+         expect(value).to.equal("60");
       });
    });
 
@@ -57,24 +78,6 @@ test.describe('Tests made on www, app.js and its associated files', function() {
          });
       });
    })
-
-   // Test 4
-   test.it('should have a drop-down saying \'Select your country...\'', function() {
-      driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
-         expect(text).to.contain('Select your country...');
-      });
-   });
-
-   // Test 5
-   test.it('should have a single-line search input box, size 60, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
-      searchLz = driver.findElement(webdriver.By.id('searchLz'));
-      searchLz.getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('Type the name, abbreviation or code of your livelihood zone here');
-      });
-      searchLz.getAttribute('size').then(function(value) {
-         expect(value).to.equal("60");
-      });
-   });
 
    // Test 6
    test.it('should unhide on the lzDetails division, making the lzName, lzCode and lzAbbrev text boxes visible', function() {
