@@ -2,4 +2,15 @@ extends layout
 
 block content
   h1= subtitle
-  p Welcome to the #{subtitle}
+  section#identify(for='identifyLz')
+     form#identifyLz(class='fill' method='post' action='/uploads/upload' enctype='multipart/form-data')
+        select#countries(class='inputButton')
+           option(value='none') Select your country...
+           option(value='bw') Botswana
+           option(value='na') Namibia
+           option(value='za') South Africa
+        br
+        label#labelSearchLz(for='searchLz') Which livelihood zone does this spreadsheet apply to?
+        input#searchLz(type='search' class='inputText' size='70' placeholder='Type the name, abbreviation or code of your livelihood zone here')
+        br
+        input#search(type= 'submit' value= 'Search' hidden= 'true')
