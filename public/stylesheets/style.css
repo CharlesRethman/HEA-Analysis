@@ -1,21 +1,29 @@
 body {
    padding: 30px;
    line-height: 3.5;
-   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-weight: 300;
-   font-size: 14px;
+/*   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+   font-family: Helvetica, Arial, sans-serif;
+/*   font-family: Tahoma, Geneva, sans-serif;*/
+   font-weight: 100;
+   font-size: 18px;
 }
 
 .fill {
    line-height: 3;
-   border-right: 10px;
 }
 
 .inputText {
-   font-size: 14px;
+   font-size: 16px;
    padding: 7px;
    margin-left: 5px;
    margin-right: 15px;
+}
+
+.inputButton {
+   font-size: 28px;
+   padding: 3px;
+   margin-left: 15px;
+   margin-right: 15px
 }
 
 a {
