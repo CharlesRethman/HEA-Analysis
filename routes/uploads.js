@@ -5,7 +5,7 @@ var express = require('express'),
 var router = express.Router();
 
 router.get('/', function(req, res) {
-   res.render('uploadPage.jade', { title : 'Load Spreadsheet', subtitle : 'HEA Analysis Spreadsheet Loader' });
+   res.render('upload.jade', { title : 'Load Spreadsheet', subtitle : 'HEA Analysis Spreadsheet Loader' });
 });
 
 router.post('/upload', function(req, res, next) {

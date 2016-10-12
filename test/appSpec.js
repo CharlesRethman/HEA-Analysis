@@ -42,7 +42,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
    });
 
    // Test 3
-   test.it('should have a single-line search input box, size 60, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
+   test.it('should have a single-line search input box, size 70, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
       searchLz = driver.findElement(webdriver.By.id('searchLz'));
       searchLz.getAttribute('placeholder').then(function(text) {
          expect(text).to.contain('Type the name, abbreviation or code of your livelihood zone here');
@@ -50,6 +50,20 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       searchLz.getAttribute('size').then(function(value) {
          expect(value).to.equal("60");
       });
+   });
+
+   // Test 9
+   test.it('should have a button with the value \'Search\', which should return a page with the\n details form', function() {
+      var searchLz = driver.findElement(webdriver.By.id('search'))
+      uploadFile.getAttribute('value').then(function(text) {
+         expect(text).to.equal('Search');
+      });
+      searchLz.click();
+      driver.wait(function() {
+         return driver.getPageSource().then(function(text) {
+            return expect(text).to.contain('');
+         });
+      }, 3000);
    });
 
    // Test 4
