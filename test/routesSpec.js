@@ -9,9 +9,13 @@ var expect = require('chai').expect,
 
 describe('Routes', function() {
    describe('Index', function() {
-      it('should conduct a match code on the DB lz_code field, abbreviation on the DB lz_abbrev field and do a full text search on the DB lz_name field', function() {
+      it('should conduct a match for code on the database lz_code field', function() {
          index.
-         it()
+         it('should conduct a match for abbreviation on the database lz_abbrev field', function() {
+            it('should conduct a full text search on the database lz_name field', function() {
+
+            });
+         });
       });
    });
 });
