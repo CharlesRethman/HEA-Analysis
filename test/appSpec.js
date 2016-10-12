@@ -41,25 +41,30 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 3
+   // Test 4
    test.it('should have a single-line search input box, size 70, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
-      searchLz = driver.findElement(webdriver.By.id('searchLz'));
-      searchLz.getAttribute('placeholder').then(function(text) {
+      searchBox = driver.findElement(webdriver.By.id('searchBox'));
+      searchBox.getAttribute('placeholder').then(function(text) {
          expect(text).to.contain('Type the name, abbreviation or code of your livelihood zone here');
       });
-      searchLz.getAttribute('size').then(function(value) {
+      searchBox.getAttribute('size').then(function(value) {
          expect(value).to.equal('70');
       });
    });
 
    // Test 9
    test.it('should have a button with the value \'Search\', which should replce the index form with the details form', function() {
-      var searchLz = driver.findElement(webdriver.By.id('search'))
-      searchLz.getAttribute('value').then(function(text) {
+      var search = driver.findElement(webdriver.By.id('search'))
+      search.getAttribute('value').then(function(text) {
          expect(text).to.equal('Search');
       });
-      searchLz.click();
+      search.click();
+      driver.findElement(webdriver.By.id('indentifyLZ')).getAttribute('action').then(function(text) {
+         console.log(text);
+         expect(text).to.equal('/search_lzs/search_lz')
+      });
       driver.wait(function() {
+
          return driver.getPageSource().then(function(text) {
             return expect(text).to.contain('class=\'fill\' method=\'post\' action=\'/search_lzs/search_lz\' enctype=\'multipart/form-data\'');
          });
