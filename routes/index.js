@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Load Spreadsheet', subtitle : 'HEA Analysis Spreadsheet Loader' });
 });
 
-router.get('/', (req, res, next) => {
+router.get('/searchLzs/searchLz', (req, res, next) => {
    
 });
 
