@@ -29,7 +29,7 @@ block content
    section#fileUpload(for='fileUpload' hidden=hide)
       form#fileUpload(class='fill' method='post' action='/uploads/upload')     
          label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file:
-         input#buttonChooseFile(type='file' name='myFiles' accept='.xlsx,.xls' multiple)
+         input#buttonChooseFile(type='file' class='inputButton' name='myFiles' accept='.xlsx,.xls' multiple)
          br
          input#submit(type='submit' class='inputButton' value='Upload' hidden=hide)
          br
