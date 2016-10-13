@@ -8,9 +8,9 @@ var express = require('express'),
    bodyParser = require('body-parser'),
    multer = require('multer');
 
-var routes = require('./routes/index'),
-   users = require('./routes/users'),
-   uploads = require('./routes/uploads');
+var index = require('./lib/routes/index'),
+   users = require('./lib/routes/users'),
+   uploads = require('./lib/routes/uploads');
 
 var app = express();
 
@@ -27,7 +27,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest : './uploads/' }).array('myFiles', 10));
 
-app.use('/', routes);
+app.use('/', index);
+//app.use('/searches', index);
 app.use('/users', users);
 app.use('/uploads', uploads);
 

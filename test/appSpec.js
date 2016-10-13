@@ -61,7 +61,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       search.click();
       driver.findElement(webdriver.By.id('indentifyLZ')).getAttribute('action').then(function(text) {
          console.log(text);
-         expect(text).to.equal('/search_lzs/search_lz')
+         expect(text).to.equal('/searches/search')
       });
       driver.wait(function() {
 
