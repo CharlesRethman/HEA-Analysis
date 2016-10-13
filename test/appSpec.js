@@ -30,7 +30,14 @@ test.describe('Tests made on www, app.js and its associated files', function() {
          expect(text).to.contain('HEA Analysis Spreadsheet Loader');
       });
       driver.findElement(webdriver.By.id('identifyLz')).getAttribute('action').then(function(text) {
-         expect(text).to.contain('http://localhost:3000/search_lzs/search_lz');
+         expect(text).to.contain('http://localhost:3000/search');
+      });
+      driver.findElement(webdriver.By.id('confirm')).isDisplayed().then(function(value) {
+         expect(value).to.equal(false);
+      });
+      driver.findElement(webdriver.By.id('confirmLz')).getAttribute('action').then(function(text) {
+         console.log(text);
+         expect(text).to.equal('http://localhost:3000/uploads');
       });
    });
 
@@ -41,7 +48,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 4
+   // Test 3
    test.it('should have a single-line search input box, size 70, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
       searchBox = driver.findElement(webdriver.By.id('searchBox'));
       searchBox.getAttribute('placeholder').then(function(text) {
@@ -52,59 +59,69 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 9
-   test.it('should have a button with the value \'Search\', which should replce the index form with the details form', function() {
+   // Test 4
+   test.it('should have a button with the value \'Search\', which should hide itself and unhide the confirm section when clicked', function() {
       var search = driver.findElement(webdriver.By.id('search'))
+      search.isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
       search.getAttribute('value').then(function(text) {
          expect(text).to.equal('Search');
       });
       search.click();
-      driver.findElement(webdriver.By.id('indentifyLZ')).getAttribute('action').then(function(text) {
-         console.log(text);
-         expect(text).to.equal('/searches/search')
-      });
       driver.wait(function() {
-
-         return driver.getPageSource().then(function(text) {
-            return expect(text).to.contain('class=\'fill\' method=\'post\' action=\'/search_lzs/search_lz\' enctype=\'multipart/form-data\'');
+         driver.findElement(webdriver.By.id('search')).isDisplayed().then(function(value) {
+            expect(value).to.equal(false);
+         });
+         return driver.findElement(webdriver.By.id('confirm')).isDisplayed().then(function(value) {
+            return expect(value).to.equal(true);
          });
       }, 3000);
    });
 
-   // Test 4
-   test.it('should hide the livelihood zone identifiers text boxes and the file upload controls, which should be in divisions that get switched on sequentially', function() {
-      driver.findElements(webdriver.By.css('div')).then(function(arr) {
-         var count = 0;
-         arr.forEach(function(elem) {
-            elem.getAttribute('hidden').then(function(value) {
-               console.log(count + ': ' + value);
-               expect(value).to.equal('true');
-            });
-         });
-      });
-   })
-
-   // Test 5
-   test.it('should navigate to the upload files URL and load elements', function() {
-      driver.get('http://localhost:3000/uploads');
-      driver.getTitle().then(function(title) {
-         expect(title).to.contain('Load Spreadsheet')
-      });
-      driver.findElement(webdriver.By.tagName('h1')).getText().then(function(text) {
-         expect(text).to.contain('HEA Analysis Spreadsheet Loader');
-      });
-      driver.findElement(webdriver.By.id('fileUpload')).getAttribute('action').then(function(text) {
-         expect(text).to.equal('http://localhost:3000/uploads/upload')
-      });
+   //Test 5
+   test.it('should now be on the route \'/search?\'', function() {
+      driver.getCurrentUrl().then(function(text) {
+         expect(text).to.equal('http://localhost:3000/search?');
+      })
    });
 
    // Test 6
-   test.it('should unhide on the lzDetails division, making the lzName, lzCode and lzAbbrev text boxes visible', function() {
-      driver.findElement(webdriver.By.id('searchLz')).sendKeys('Okhahlamba open access intense crops and livestock').then(function() {
-         driver.findElement(webdriver.By.id('lzDetails')).getAttribute('hidden').then(function(value) {
-            expect(value).to.equal('false');
-         })
-      })
+   test.it('should have livelihood zone identifiying input boxes, which should be displayed', function() {
+      driver.findElement(webdriver.By.id('lzCode')).isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
+      driver.findElement(webdriver.By.id('lzAbbrev')).isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
+      driver.findElement(webdriver.By.id('lzName')).isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
+   })
+
+
+   // Test 7
+   test.it('should have a button with the value \'Confirm\', which should load the uploads form when clicked', function() {
+      var use = driver.findElement(webdriver.By.id('use'))
+      use.isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
+      use.getAttribute('value').then(function(text) {
+         expect(text).to.equal('Confirm');
+      });
+      use.click();
+      driver.wait(function() {
+         return driver.getCurrentUrl().then(function(text) {
+            return expect(text).to.equal('http://localhost:3000/uploads');
+         });
+      }, 3000);
+   });
+
+   // Test 8
+   test.it('should have a form with the action \'uploads/upload\' in it', function() {
+      driver.findElement(webdriver.By.id('fileUploadLz')).getAttribute('action').then(function(text) {
+         expect(text).to.equal('http://localhost:3000/uploads/upload');
+      });
    });
 
    // Test 7
