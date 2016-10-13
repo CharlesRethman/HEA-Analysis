@@ -1,6 +1,6 @@
 /*
  *
- * Test for the server index.js
+ * Test for the server, www and app.js
  */
 
 var expect = require('chai').expect,
@@ -124,15 +124,15 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 7
+   // Test 9
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('labelChooseFile')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
    });
 
-   // Test 8
-   test.it('should have a \'Choose file\' button', function() {
+   // Test 10
+   test.it('should have a \'Choose files\' button', function() {
       chooseFile = driver.findElement(webdriver.By.id('buttonChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
          var arr = text.split(',');
@@ -149,7 +149,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
-   // Test 9
+   // Test 11
    test.it('should have a button with the value \'Upload\'', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submit'))
       uploadFile.getAttribute('value').then(function(text) {
