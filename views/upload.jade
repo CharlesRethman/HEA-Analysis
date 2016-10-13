@@ -15,7 +15,7 @@ block content
          br
          input#search(type='submit' class='inputButton' value='Search' hidden=!hide disabled=!hide)
    sectiom#confirm(for='confirmLz' hidden=hide)
-      form#confirmLz(class='fill' method='post' action='/uploads'   enctype='multipart/form-data')
+      form#confirmLz(class='fill' method='post' action='/uploads' enctype='multipart/form-data')
          label#lzName_label(for='lzName') Livelihood zone's full name:
          input#lzName(type='text' class='inputText' size='80')
          br
@@ -27,7 +27,7 @@ block content
          br
          input#confirm(type='submit' class='inputButton' value='Confirm' hidden=!hide disabled=!hide)
    section#fileUpload(for='fileUpload' hidden=hide)
-      form#fileUploadLz(class='fill' method='post' action='/uploads/upload')     
+      form#fileUploadLz(class='fill' method='post' action='/uploads/upload' enctype='multipart/form-data')     
          label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file:
          input#buttonChooseFile(type='file' class='inputButton' name='myFiles' accept='.xlsx,.xls' multiple)
          br
