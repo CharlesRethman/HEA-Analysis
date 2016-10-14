@@ -29,7 +29,24 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
          expect(text).to.contain('HEA Analysis Spreadsheet Loader');
       });
-      driver.findElement(webdriver.By.id('identifyLz')).getAttribute('action').then(function(text) {
+      driver.findElement(webdriver.By.id('assess')).isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
+      formAssess = driver.findElement(webdriver.By.id('assessLz'))
+      formAssess.getAttribute('method').then(function(text) {
+         expect(text).to.equal('get');
+      });
+      formAssess.getAttribute('action').then(function(text) {
+         expect(text).to.contain('http://localhost:3000/countries');
+      });
+      driver.findElement(webdriver.By.id('identify')).isDisplayed().then(function(value) {
+         expect(value).to.equal(false);
+      });
+      formIdentify = driver.findElement(webdriver.By.id('identifyLz'))
+      formIdentify.getAttribute('method').then(function(text) {
+         expect(text).to.equal('get');
+      });
+      formIdentify.getAttribute('action').then(function(text) {
          expect(text).to.contain('http://localhost:3000/search');
       });
       driver.findElement(webdriver.By.id('confirm')).isDisplayed().then(function(value) {
@@ -40,6 +57,9 @@ test.describe('Tests made on www, app.js and its associated files', function() {
          expect(text).to.equal('http://localhost:3000/uploads');
       });
    });
+
+   // Test 2
+
 
    // Test 2
    test.it('should have a drop-down saying \'Select your country...\'', function() {
