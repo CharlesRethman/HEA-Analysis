@@ -21,17 +21,27 @@ test.describe('Tests made on www, app.js and its associated files', function() {
    });
 
    // Test 1
-   test.it('should open the browser, retrieve the title, heading and first form', function() {
+   test.it('should open the browser, retrieve the title, heading and initial display', function() {
       driver.get('http://localhost:3000');
       driver.getTitle().then(function(title) {
          expect(title).to.contain('Load Spreadsheet')
       });
-      driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
-         expect(text).to.contain('HEA Analysis Spreadsheet Loader');
-      });
    });
 
    // Test 2
+   test.it('should have an image that takes up the whole window, containing the heading and other information', function() {
+      driver.findElement(webdriver.By.id('wrapper')).getAttribute('background-image').then(function(text) {
+         expect(text).to.contain('images/grain.png');
+      });
+      driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
+         expect(text).to.contain('HEA Analysis Spreadsheet Loader');
+      });
+      driver.findElement(webdriver.By.id('scrollDown')).getText().then(function(text) {
+         expect(text).to.equal('');
+      });
+   });
+
+   // Test 3
    test.it('start with a (visible) form with inputs for identifying the assessment', function() {
       driver.findElement(webdriver.By.id('assess')).isDisplayed().then(function(value) {
          expect(value).to.equal(true);
