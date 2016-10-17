@@ -36,8 +36,8 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
          expect(text).to.contain('HEA Analysis Spreadsheet Loader');
       });
-      driver.findElement(webdriver.By.id('scrollDown')).getText().then(function(text) {
-         expect(text).to.equal('');
+      driver.findElement(webdriver.By.id('scrollDown')).getAttribute('src').then(function(text) {
+         expect(text).to.equal('images/arrowhead-down-256.png');
       });
    });
 

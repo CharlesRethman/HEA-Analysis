@@ -4,6 +4,8 @@ body
    block content
       div#wrapper
          h1(align='center')=subtitle
+         footer(align='center')
+            img#scrollDown(src='images/arrowhead-down-256.png' alt='Scroll down')
       div#assess(for='assessLz')
          form#assessLz(class='fill' method='post' action='/assessment' enctype='multipart/form-data')
          label#labelCountries(for='countries') Which country?
