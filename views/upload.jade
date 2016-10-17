@@ -1,3 +1,11 @@
 extends index
 
-block content
+block append content
+   div#fileUpload(for='fileUpload' hidden=third)
+      form#fileUploadLz(class='fill' method='post' action='/uploads/upload' enctype='multipart/form-data')     
+         label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file:
+         input#buttonChooseFile(type='file' class='inputButton' name='myFiles' accept='.xlsx,.xls' multiple)
+         br
+         input#submit(type='submit' class='inputButton' value='Upload' hidden=hide disabled=hide)
+         br
+         input#use(type='submit' class='inputButton' value='Confirm' hidden=third disable=third)
