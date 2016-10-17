@@ -30,14 +30,14 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 
    // Test 2
    test.it('should have an image that takes up the whole window, containing the heading and other information', function() {
-      driver.findElement(webdriver.By.id('wrapper')).getAttribute('background-image').then(function(text) {
+      driver.findElement({ id : 'wrapper'}).getCssValue('background-image').then(function(text) {
          expect(text).to.contain('images/grain.png');
       });
-      driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
-         expect(text).to.contain('HEA Analysis Spreadsheet Loader');
+      driver.findElement({ css : 'h1' }).getText().then(function(text) {
+         expect(text).to.equal('HEA Analysis Spreadsheet Loader');
       });
-      driver.findElement(webdriver.By.id('scrollDown')).getAttribute('src').then(function(text) {
-         expect(text).to.equal('images/arrowhead-down-256.png');
+      driver.findElement({ id : 'scrollDown' }).getAttribute('src').then(function(text) {
+         expect(text).to.contain('images/arrowhead-down-256.png');
       });
    });
 
@@ -83,17 +83,22 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 5
-
-
    // Test 6
+   test.it('should have a text box for entering the geographic hazard and a text box for entering the selective hazard', function() {
+      driver.findElement(webdriver.By.id('hazardGeo')).getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Floods, drought, etc.');
+      });
+      driver.findElement(webdriver.By.id('hazardSel')).getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Prices, social grants, etc.');
+      });
+   });
+
+   // Test 7
    test.it('should have a drop-down saying \'Select your country...\'', function() {
       driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
          expect(text).to.contain('Select your country...');
       });
    });
-
-   // Test
 
    // Test 7
    test.it('should have a single-line search input box, size 70, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
