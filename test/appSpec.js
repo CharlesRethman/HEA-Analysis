@@ -29,16 +29,24 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       driver.findElement(webdriver.By.css('h1')).getText().then(function(text) {
          expect(text).to.contain('HEA Analysis Spreadsheet Loader');
       });
+   });
+
+   // Test 2
+   test.it('start with a (visible) form with inputs for identifying the assessment', function() {
       driver.findElement(webdriver.By.id('assess')).isDisplayed().then(function(value) {
          expect(value).to.equal(true);
       });
       formAssess = driver.findElement(webdriver.By.id('assessLz'))
       formAssess.getAttribute('method').then(function(text) {
-         expect(text).to.equal('get');
+         expect(text).to.equal('post');
       });
       formAssess.getAttribute('action').then(function(text) {
-         expect(text).to.contain('http://localhost:3000/countries');
+         expect(text).to.contain('http://localhost:3000/assessment');
       });
+   });
+
+   // Test 3
+   test.it('start with a (hidden) form with inputs for identifying the livelihood zone', function() {
       driver.findElement(webdriver.By.id('identify')).isDisplayed().then(function(value) {
          expect(value).to.equal(false);
       });
@@ -49,26 +57,33 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       formIdentify.getAttribute('action').then(function(text) {
          expect(text).to.contain('http://localhost:3000/search');
       });
+   });
+
+   // Test 4
+   test.it('start with a (hidden) form with inputs for confirming the livelihood zone', function() {
       driver.findElement(webdriver.By.id('confirm')).isDisplayed().then(function(value) {
          expect(value).to.equal(false);
       });
-      driver.findElement(webdriver.By.id('confirmLz')).getAttribute('action').then(function(text) {
-         console.log(text);
+      formConfirm = driver.findElement(webdriver.By.id('confirmLz'))
+      formConfirm.getAttribute('method').then(function(text) {
+         expect(text).to.equal('post');
+      });
+      formConfirm.getAttribute('action').then(function(text) {
          expect(text).to.equal('http://localhost:3000/uploads');
       });
    });
 
-   // Test 2
+   // Test 5
 
 
-   // Test 2
+   // Test 6
    test.it('should have a drop-down saying \'Select your country...\'', function() {
       driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
          expect(text).to.contain('Select your country...');
       });
    });
 
-   // Test 3
+   // Test 7
    test.it('should have a single-line search input box, size 70, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
       searchBox = driver.findElement(webdriver.By.id('searchBox'));
       searchBox.getAttribute('placeholder').then(function(text) {
@@ -79,7 +94,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 4
+   // Test 8
    test.it('should have a button with the value \'Search\', which should hide itself and unhide the confirm section when clicked', function() {
       var search = driver.findElement(webdriver.By.id('search'))
       search.isDisplayed().then(function(value) {
@@ -99,14 +114,14 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       }, 3000);
    });
 
-   //Test 5
+   //Test 9
    test.it('should now be on the route \'/search?\'', function() {
       driver.getCurrentUrl().then(function(text) {
          expect(text).to.equal('http://localhost:3000/search?');
       })
    });
 
-   // Test 6
+   // Test 10
    test.it('should have livelihood zone identifiying input boxes, which should be displayed', function() {
       driver.findElement(webdriver.By.id('lzCode')).isDisplayed().then(function(value) {
          expect(value).to.equal(true);
@@ -120,7 +135,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
    })
 
 
-   // Test 7
+   // Test 11
    test.it('should have a button with the value \'Confirm\', which should load the uploads form when clicked', function() {
       var use = driver.findElement(webdriver.By.id('use'))
       use.isDisplayed().then(function(value) {
@@ -137,21 +152,21 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       }, 3000);
    });
 
-   // Test 8
+   // Test 12
    test.it('should have a form with the action \'uploads/upload\' in it', function() {
       driver.findElement(webdriver.By.id('fileUploadLz')).getAttribute('action').then(function(text) {
          expect(text).to.equal('http://localhost:3000/uploads/upload');
       });
    });
 
-   // Test 9
+   // Test 13
    test.it('should have a label saying \'Browse for the folder or spreadsheet file\'', function() {
       driver.findElement(webdriver.By.id('labelChooseFile')).getText().then(function(text) {
          expect(text).to.contain('Browse for the folder or spreadsheet file');
       });
    });
 
-   // Test 10
+   // Test 14
    test.it('should have a \'Choose files\' button', function() {
       chooseFile = driver.findElement(webdriver.By.id('buttonChooseFile'));
       chooseFile.getAttribute('accept').then(function(text) {
@@ -169,7 +184,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 //      expect(txtBox.getAttribute('value')).to.equal(text);
    });
 
-   // Test 11
+   // Test 15
    test.it('should have a button with the value \'Upload\'', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submit'))
       uploadFile.getAttribute('value').then(function(text) {

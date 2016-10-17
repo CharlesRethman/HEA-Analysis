@@ -1,18 +1,49 @@
+html {
+   margin: 0;
+   height : 100%;
+   font-family: sans-serif;
+}
+
 body {
-   padding: 30px;
-   line-height: 3.5;
+   height: 100%;
+   margin: 0;
+   line-height: 3;
+/*   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;*/
 /*   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
    font-family: Helvetica, Arial, sans-serif;
    font-weight: 100;
    font-size: 18px;
 }
 
-label {
-   margin-left: 5px;
+header {
+   height: auto;
 }
 
-.fill {
+h1 {
    line-height: 3;
+   color: #FFFFFF;
+
+}
+
+label {
+   margin-left: 8px;
+}
+
+form {
+   line-height: 3;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#wrapper {
+   margin-top: -24px;
+   min-height: 100%;
+   background-image: url(/images/grain.png);
+   background-position: left top;
+   background-size: cover;
+   background-repeat: no-repeat;
 }
 
 .inputText {
@@ -24,12 +55,8 @@ label {
 
 .inputButton {
    font-size: 16px;
-/*   font-family: "Lucida grande", monospace;*/
+   font-family: "Lucida grande", monospace;*/
    padding: 3px;
    margin-left: 5px;
    margin-right: 15px
-}
-
-a {
-  color: #00B7FF;
 }
