@@ -1,21 +1,32 @@
 extends index
 
 block content
-   h1= subtitle
-   section#identify(for='identifyLz')
+   div#wrapper
+      h1(align='center')=subtitle
+      footer(align='center')
+         a(href='/uploads')
+            img#scrollDown(src='images/arrowhead-down-256.png' alt='Scroll down')
+   div#assess(for='assessLz')
+      form#assessLz(class='fill' method='post' action='/assessment' enctype='multipart/form-data')
+      label#labelCountries(for='countries') Which country?
+      select#countries(class='inputButton')
+         option(value='none') Select your country...
+         option(value='bw') Botswana
+         option(value='na') Namibia
+         option(value='za') South Africa
+      br
+      label#labelDate(for='date') When was the assessment?
+      input#date(type='month' class='inputButton')
+      br
+      input#continue(type='submit' class='inputButton' value='Continue...' hidden=!hide enable=!hide)
+   div#identify(for='identifyLz' hidden=hide)
       form#identifyLz(class='fill' method='get' action='/search' enctype='multipart/form-data')
-         select#countries(class='inputButton')
-            option(value='none') Select your country...
-            option(value='bw') Botswana
-            option(value='na') Namibia
-            option(value='za') South Africa
-         br
          label#labelSearchLz(for='searchLz') Which livelihood zone does this spreadsheet apply to?
          input#searchBox(type='search' class='inputText' size='70' placeholder='Type the name, abbreviation or code of your livelihood zone here')
          br
-         input#search(type='submit' class='inputButton' value='Search' hidden=!hide disabled=!hide)
-   sectiom#confirm(for='confirmLz' hidden=hide)
-      form#confirmLz(class='fill' method='post' action='/uploads' enctype='multipart/form-data')
+         input#search(type='submit' class='inputButton' value='Search' hidden=hide disable=hide)
+   div#confirm(for='confirmLz' hidden=hide)
+      form#confirmLz(class='fill' method='post' action='/uploads'   enctype='multipart/form-data')
          label#lzName_label(for='lzName') Livelihood zone's full name:
          input#lzName(type='text' class='inputText' size='80')
          br
@@ -25,11 +36,4 @@ block content
          label#lzAbbrev_label(for='lzAbbrev') Livelihood zone's 5-digit alphanumeric abbreviation:
          input#lzAbbrev(type='text' class='inputText' size=6)
          br
-         input#confirm(type='submit' class='inputButton' value='Confirm' hidden=!hide disabled=!hide)
-   section#fileUpload(for='fileUpload' hidden=hide)
-      form#fileUploadLz(class='fill' method='post' action='/uploads/upload' enctype='multipart/form-data')     
-         label#labelChooseFile(for='buttonChooseFile') Browse for the folder or spreadsheet file:
-         input#buttonChooseFile(type='file' class='inputButton' name='myFiles' accept='.xlsx,.xls' multiple)
-         br
-         input#submit(type='submit' class='inputButton' value='Upload' hidden=hide disabled=hide)
-         br
+         input#use(type='submit' class='inputButton' value='Confirm' hidden=hide disable=hide)

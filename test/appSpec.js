@@ -43,7 +43,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 
    // Test 3
    test.it('start with a (visible) form with inputs for identifying the assessment', function() {
-      driver.findElement(webdriver.By.id('assess')).isDisplayed().then(function(value) {
+      driver.findElement(webdriver.By.id('identify')).isDisplayed().then(function(value) {
          expect(value).to.equal(true);
       });
       formAssess = driver.findElement(webdriver.By.id('assessLz'))
@@ -55,7 +55,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 3
+   // Test 4
    test.it('start with a (hidden) form with inputs for identifying the livelihood zone', function() {
       driver.findElement(webdriver.By.id('identify')).isDisplayed().then(function(value) {
          expect(value).to.equal(false);
@@ -69,7 +69,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
       });
    });
 
-   // Test 4
+   // Test 5
    test.it('start with a (hidden) form with inputs for confirming the livelihood zone', function() {
       driver.findElement(webdriver.By.id('confirm')).isDisplayed().then(function(value) {
          expect(value).to.equal(false);
@@ -92,6 +92,8 @@ test.describe('Tests made on www, app.js and its associated files', function() {
          expect(text).to.contain('Select your country...');
       });
    });
+
+   // Test
 
    // Test 7
    test.it('should have a single-line search input box, size 70, with \'Type the name, abbreviation or code of your livelihood zone here\' shown in it', function() {
