@@ -43,7 +43,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 
    // Test 3
    test.it('start with a (visible) form with inputs for identifying the assessment', function() {
-      driver.findElement(webdriver.By.id('identify')).isDisplayed().then(function(value) {
+      driver.findElement(webdriver.By.id('assess')).isDisplayed().then(function(value) {
          expect(value).to.equal(true);
       });
       formAssess = driver.findElement(webdriver.By.id('assessLz'))
