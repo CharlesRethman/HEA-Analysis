@@ -84,20 +84,40 @@ test.describe('Tests made on www, app.js and its associated files', function() {
    });
 
    // Test 6
-   test.it('should have a text box for entering the geographic hazard and a text box for entering the selective hazard', function() {
-      driver.findElement(webdriver.By.id('hazardGeospatial')).getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('Floods, drought, etc.');
-      });
-      driver.findElement(webdriver.By.id('hazardScenario')).getAttribute('placeholder').then(function(text) {
-         expect(text).to.contain('Prices, social grants, etc.');
-      });
-   });
-
-   // Test 7
    test.it('should have a drop-down saying \'Select your country...\'', function() {
       driver.findElement(webdriver.By.id('countries')).getText().then(function(text) {
          expect(text).to.contain('Select your country...');
       });
+   });
+
+   // Test 7
+   test.it('should have a text box for entering the geographic hazard and a text box for entering the selective hazard', function() {
+      driver.findElement({ id : 'hazardGeospatial' }).getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Floods, drought, etc.');
+      });
+      driver.findElement({ id : 'hazardScenario' }).getAttribute('placeholder').then(function(text) {
+         expect(text).to.contain('Prices, social grants, etc.');
+      });
+   });
+
+   // Test 8
+   test.it('should have a button with the value \'Continue\', which should hide itself and unhide the search section when clicked', function() {
+      var cont = driver.findElement({ id : 'continue' })
+      cont.isDisplayed().then(function(value) {
+         expect(value).to.equal(true);
+      });
+      cont.getAttribute('value').then(function(text) {
+         expect(text).to.equal('Continue...');
+      });
+      cont.click();
+      driver.wait(function() {
+         driver.findElement({ id : 'continue' }).isDisplayed().then(function(value) {
+            expect(value).to.equal(false);
+         });
+         return driver.findElement({ id : 'search' }).isDisplayed().then(function(value) {
+            return expect(value).to.equal(true);
+         });
+      }, 3000);
    });
 
    // Test 7
@@ -113,7 +133,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 
    // Test 8
    test.it('should have a button with the value \'Search\', which should hide itself and unhide the confirm section when clicked', function() {
-      var search = driver.findElement(webdriver.By.id('search'))
+      var search = driver.findElement({ id : 'search' })
       search.isDisplayed().then(function(value) {
          expect(value).to.equal(true);
       });
@@ -202,7 +222,7 @@ test.describe('Tests made on www, app.js and its associated files', function() {
    });
 
    // Test 15
-   test.it('should have a button with the value \'Upload\'', function() {
+   test.it('should have a button with the value \'Upload\', that uploads the spreadsheet when clicked', function() {
       var uploadFile = driver.findElement(webdriver.By.id('submit'))
       uploadFile.getAttribute('value').then(function(text) {
          expect(text).to.equal('Upload');
