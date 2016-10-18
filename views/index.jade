@@ -19,7 +19,12 @@ body
             label#labelDate(for='date') When was the assessment?
             input#date(type='month' class='inputButton')
             br
-            label#labelHazardGeo(for='hazardGeo')
+            label#labelHazardGeospatial(for='hazardGeospatial') The hazard area?
+            input#hazardGeospatial(type='text' class='inputText' size='60' placeholder='Floods, drought, etc.')
+            br
+            label#labelHazardScenario(for='hazardScenario') The hazard scenario?
+            input#hazardScenario(type='text' class='inputText' size='60' placeholder='Prices, social grants, etc.')
+            br
             input#continue(type='submit' class='inputButton' value='Continue...' hidden=!first enable=!first)
       div#identify(for='identifyLz' hidden=first)
          form#identifyLz(class='fill' method='get' action='/search' enctype='multipart/form-data')

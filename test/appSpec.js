@@ -85,10 +85,10 @@ test.describe('Tests made on www, app.js and its associated files', function() {
 
    // Test 6
    test.it('should have a text box for entering the geographic hazard and a text box for entering the selective hazard', function() {
-      driver.findElement(webdriver.By.id('hazardGeo')).getAttribute('placeholder').then(function(text) {
+      driver.findElement(webdriver.By.id('hazardGeospatial')).getAttribute('placeholder').then(function(text) {
          expect(text).to.contain('Floods, drought, etc.');
       });
-      driver.findElement(webdriver.By.id('hazardSel')).getAttribute('placeholder').then(function(text) {
+      driver.findElement(webdriver.By.id('hazardScenario')).getAttribute('placeholder').then(function(text) {
          expect(text).to.contain('Prices, social grants, etc.');
       });
    });
