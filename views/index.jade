@@ -25,13 +25,13 @@ body
             label#labelHazardScenario(for='hazardScenario') The hazard scenario?
             input#hazardScenario(type='text' class='inputText' size='60' placeholder='Prices, social grants, etc.')
             br
-            input#continue(type='submit' class='inputButton' value='Continue...' hidden=!first enable=!first)
+            input#continue(type='submit' value='Continue...' hidden=!first enable=!first)
       div#identify(for='identifyLz' hidden=first)
          form#identifyLz(class='fill' method='get' action='/search' enctype='multipart/form-data')
             label#labelSearchLz(for='searchLz') Which livelihood zone does this spreadsheet apply to?
             input#searchBox(type='search' class='inputText' size='70' placeholder='Type the name, abbreviation or code of your livelihood zone here')
             br
-            input#search(type='submit' class='inputButton' value='Search' hidden=!second disable=!second)
+            input#search(type='submit' value='Search' hidden=!second disable=!second)
       div#confirm(for='confirmLz' hidden=second)
          form#confirmLz(class='fill' method='post' action='/uploads' enctype='multipart/form-data')
             label#lzName_label(for='lzName') Livelihood zone's full name:
@@ -43,4 +43,4 @@ body
             label#lzAbbrev_label(for='lzAbbrev') Livelihood zone's 5-digit alphanumeric abbreviation:
             input#lzAbbrev(type='text' class='inputText' size=6)
             br
-            input#use(type='submit' class='inputButton' value='Confirm' hidden=!third disable=!third)
+            input#use(type='submit' value='Confirm' hidden=!third disable=!third)
