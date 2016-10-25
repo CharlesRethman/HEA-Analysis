@@ -6,4 +6,9 @@ html
       link(rel='stylesheet', href='/stylesheets/style.css')
       link(href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet")
    body
+      block header
+         div#wrapper
+            h1(align='center')=subtitle
+            footer(align='center')
+            a(href='#assess'): img#scrollDown(src='images/arrowhead-down-256.png' alt='Scroll down')
       block content
