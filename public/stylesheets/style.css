@@ -17,15 +17,10 @@ header {
    height: auto;
 }
 
-footer {
-   position: relative;
-   bottom: 0px;
-}
-
 h1 {
    font-size: 60px;
    font-weight: normal;
-   line-height: 3;
+   line-height: 1.5;
    color: #FFFFFF;
 
 }
@@ -40,6 +35,7 @@ form {
 
 a {
   color: #00B7FF;
+  line-height: 0;
 }
 
 #wrapper {
@@ -51,7 +47,15 @@ a {
    overflow: hidden;
 }
 
+#scroll {
+   position: absolute;
+   left: calc(50% - 37px);
+   bottom: 3px;
+   line-height: 0;
+}
+
 #scrollDown {
+   align-self: center;
    color: #FFFFFF;
    width: 72px;
    height: 72px;
