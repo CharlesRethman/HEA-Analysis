@@ -2,25 +2,32 @@ extends layout
 
 body
    block content
+      script(type='text/javascript') function revealNext() {alert("button clicked!")};
       div#assess(for='assessLz')
          form#assessLz(class='fill' method='post' action='/assessment' enctype='multipart/form-data')
+            input#variable(type='checkbox' value=first)
+            br
             label#labelCountries(for='countries') Which country?
             select#countries(class='inputButton')
                option(value='none') Select your country...
                option(value='bw') Botswana
+               option(value='ls') Lesotho
+               option(value='mw') Malawi
                option(value='na') Namibia
+               option(value='sz') Swaziland
                option(value='za') South Africa
+               option(value='zm') Zambia
             br
-            label#labelDate(for='date') When was the assessment?
+            label#labelDate(for='date' placeholder='Month - Year') When was the assessment?
             input#date(type='month' class='inputText')
             br
             label#labelHazardGeospatial(for='hazardGeospatial') The hazard area?
-            input#hazardGeospatial(type='text' class='inputText' size='60' placeholder='Floods, drought, etc.')
+            input#hazardGeospatial(type='text' class='inputText' size='60' placeholder='Floods, drought, normal, etc.')
             br
             label#labelHazardScenario(for='hazardScenario') The hazard scenario?
             input#hazardScenario(type='text' class='inputText' size='60' placeholder='Prices, social grants, etc.')
             br
-            input#continue(type='submit' class='inputButton' value='Continue...' hidden=!first enable=!first)
+            input#continue(type='submit' class='inputButton' value='Continue...' hidden=!first enable=!first onclick='revealNext();')
       div#identify(for='identifyLz' hidden=first)
          form#identifyLz(class='fill' method='get' action='/search' enctype='multipart/form-data')
             label#labelSearchLz(for='searchLz') Which livelihood zone does this spreadsheet apply to?
